@@ -1,0 +1,165 @@
+@import "tailwindcss";
+
+@theme {
+  /* 2026 Aurora Pastel palette — light, airy, romantic */
+  --color-primary: #D4789C;       /* dusty rose */
+  --color-primary-light: #F2C4D6; /* light rose */
+  --color-secondary: #B8A0D8;     /* soft lavender */
+  --color-secondary-light: #E8D9FF; /* light lavender */
+  --color-accent: #E8B87D;        /* warm gold */
+  --color-accent-light: #FFF0D4;  /* cream gold */
+  --color-peach: #F9C6B0;         /* soft peach */
+  --color-peach-light: #FFE7DE;   /* light peach */
+  --color-sky: #C9F2FF;           /* airy blue */
+
+  /* Surfaces */
+  --color-surface: #FFFAFC;       /* warm white */
+  --color-surface-glass: rgba(255, 255, 255, 0.6);
+  --color-surface-dark: #1E1533;  /* deep purple for contrast sections */
+
+  /* Text */
+  --color-text: #2D2438;          /* warm dark */
+  --color-text-muted: #7A6B8A;    /* muted lavender-grey */
+  --color-text-light: #B0A3BD;    /* light text on dark bg */
+
+  --font-hero: "Great Vibes", cursive;         /* calligraphic — hero name only */
+  --font-heading: "Playfair Display", serif;   /* elegant serif — section headings */
+  --font-body: "Be Vietnam Pro", sans-serif;   /* clean modern — body text, Vietnamese */
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+}
+
+body {
+  font-family: var(--font-body);
+  background-color: var(--color-surface);
+  color: var(--color-text);
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-surface);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-primary-light);
+  border-radius: 3px;
+}
+
+/* Soft mesh gradient — light aurora */
+@keyframes gradient-shift {
+  0%, 100% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+}
+
+.mesh-gradient {
+  background: linear-gradient(
+    135deg,
+    #FFF5F9 0%,
+    #F3E8FF 25%,
+    #E8F4FD 50%,
+    #FFF0E6 75%,
+    #FFF5F9 100%
+  );
+  background-size: 400% 400%;
+  animation: gradient-shift 20s ease infinite;
+}
+
+.mesh-gradient-dark {
+  background:
+    radial-gradient(ellipse 80% 60% at 20% 80%, rgba(212, 120, 156, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 60% 50% at 80% 20%, rgba(184, 160, 216, 0.10) 0%, transparent 50%),
+    radial-gradient(ellipse 70% 70% at 50% 50%, rgba(232, 184, 125, 0.06) 0%, transparent 60%),
+    linear-gradient(
+      160deg,
+      #2A1E2E 0%,
+      #2D2139 30%,
+      #261D30 60%,
+      #2A1E2E 100%
+    );
+}
+
+/* Petal animation */
+@keyframes petal-fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg) translateX(0);
+    opacity: 0.8;
+  }
+  25% {
+    transform: translateY(25vh) rotate(90deg) translateX(30px);
+  }
+  50% {
+    transform: translateY(50vh) rotate(180deg) translateX(-20px);
+  }
+  75% {
+    transform: translateY(75vh) rotate(270deg) translateX(40px);
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg) translateX(-10px);
+    opacity: 0;
+  }
+}
+
+.petal {
+  animation: petal-fall linear infinite;
+  pointer-events: none;
+}
+
+/* Shimmer text */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.text-shimmer {
+  background: linear-gradient(90deg, var(--color-primary), var(--color-accent), var(--color-secondary), var(--color-primary));
+  background-size: 200% auto;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  animation: shimmer 4s linear infinite;
+}
+
+/* Glass card */
+.glass-card {
+  background: rgba(255, 255, 255, 0.55);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow:
+    0 8px 32px rgba(212, 120, 156, 0.08),
+    0 2px 8px rgba(184, 160, 216, 0.06);
+}
+
+/* Glass card on dark backgrounds */
+.glass-card-dark {
+  background: rgba(255, 255, 255, 0.06);
+  backdrop-filter: blur(24px) saturate(1.2);
+  -webkit-backdrop-filter: blur(24px) saturate(1.2);
+  border: 1px solid rgba(212, 120, 156, 0.12);
+  box-shadow:
+    0 8px 32px rgba(42, 30, 46, 0.4),
+    0 0 0 0.5px rgba(255, 255, 255, 0.06) inset;
+}
+
+/* Soft blob decorations */
+.blob {
+  border-radius: 50%;
+  filter: blur(80px);
+  opacity: 0.4;
+  pointer-events: none;
+}
