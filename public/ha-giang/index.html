@@ -86,6 +86,7 @@
 
     /* sections */
     section { padding: 40px 0; }
+    main { padding-bottom: 48px; }
     .sec-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
     .sec-head h2 { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 800; }
     .sec-head p { margin: 4px 0 0; font-size: 16px; color: var(--muted); }
@@ -125,14 +126,15 @@
     .stamp { display: inline-block; font: 700 12.5px/1 var(--font); letter-spacing: .04em; text-transform: uppercase; padding: 5px 7px; border: 2px solid currentColor; border-radius: 6px; transform: rotate(-3deg); white-space: nowrap; }
     .stamp.check { color: #c7282e; } .stamp.booked { color: var(--signal); }
 
-    /* photo spots */
-    .spots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
-    .spot { overflow: hidden; display: flex; flex-direction: column; }
-    .spot img { width: 100%; height: 200px; object-fit: cover; border-bottom: var(--line); }
-    .spot .body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
-    .spot h3 { font-size: 1.4rem; font-weight: 800; }
-    .spot p { margin: 0; font-size: 16.5px; color: var(--ink-2); }
-    .spot .meta { margin-top: auto; padding-top: 4px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+    /* photo spots (bento) */
+    .bento { display: grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 230px; gap: 18px; grid-auto-flow: dense; }
+    .tile { position: relative; margin: 0; overflow: hidden; background: var(--surface); border: var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
+    .tile.w2 { grid-column: span 2; } .tile.h2 { grid-row: span 2; }
+    .tile img { width: 100%; height: 100%; object-fit: cover; }
+    .tile figcaption { position: absolute; left: 12px; bottom: 12px; max-width: calc(100% - 24px); background: var(--surface); border: 2px solid var(--ink); border-radius: 10px; padding: 7px 11px; box-shadow: 2px 2px 0 var(--ink); }
+    .tile figcaption b { display: block; font: 700 17px/1.25 var(--font); }
+    .tile figcaption span { display: block; font: 600 13.5px/1.35 var(--font-mono); color: var(--ink-2); margin-top: 2px; }
+    .tile .flag { position: absolute; top: 12px; left: 12px; font: 700 13px/1 var(--font); background: var(--mark); border: 2px solid var(--ink); border-radius: 999px; padding: 6px 10px; box-shadow: 2px 2px 0 var(--ink); }
 
     /* tickets */
     .tickets { display: grid; gap: 22px; }
@@ -169,17 +171,11 @@
     .checks small { display: block; font-size: 15px; font-weight: 400; color: var(--muted); margin-top: 1px; }
     .checks a { font-weight: 600; }
 
-    /* footer */
-    footer { padding: 10px 0 56px; }
-    footer details { padding: 14px 18px; }
-    footer summary { cursor: pointer; font: 700 16px/1.4 var(--font); }
-    footer ol { margin: 12px 0 0; padding-left: 20px; font-size: 14.5px; line-height: 1.6; color: var(--ink-2); }
-    footer .fine { margin-top: 14px; font-size: 14.5px; color: var(--muted); }
-
     @media (max-width: 900px) {
       .hero-grid, .lists { grid-template-columns: 1fr; }
       .stats { grid-template-columns: repeat(2, 1fr); }
-      .days, .spots { grid-template-columns: 1fr; }
+      .days { grid-template-columns: 1fr; }
+      .bento { grid-template-columns: repeat(2, 1fr); grid-auto-rows: 200px; }
       .wx-card { grid-template-columns: 1fr; }
     }
     @media (max-width: 620px) {
@@ -187,6 +183,11 @@
       .burst { width: 114px; height: 114px; top: -30px; right: -6px; }
       .burst span { font-size: 11.5px; padding: 0 18px; } .burst span b { font-size: 20px; }
       .wx-grid { grid-template-columns: 1fr; }
+      .bento { gap: 14px; grid-auto-rows: 165px; }
+      .tile:not(.w2) { grid-row: span 2; }
+      .tile figcaption { left: 8px; bottom: 8px; max-width: calc(100% - 16px); padding: 6px 9px; }
+      .tile figcaption b { font-size: 15.5px; }
+      .tile figcaption span { font-size: 12.5px; }
       .ticket { grid-template-columns: 1fr; }
       .stub { border-right: 0; border-bottom: 2.5px dashed var(--ink); border-radius: 14px 14px 0 0; }
       .stub::before, .stub::after { display: none; }
@@ -240,7 +241,7 @@
           <div class="pulse" role="status"><span class="dot"></span><span id="pulse-text">Đang tính giờ lên xe…</span></div>
         </div>
         <figure class="hero-photo">
-          <div class="card"><img src="img/nhoque.webp" alt="Sông Nho Quế uốn lượn dưới hẻm vực đá vôi" width="1400" height="933" /></div>
+          <div class="card"><img src="img/nhoque.webp" title="Ảnh: NKSTTSSHNVN · CC BY-SA 4.0 · Wikimedia Commons" alt="Sông Nho Quế uốn lượn dưới hẻm vực đá vôi" width="1400" height="933" /></div>
           <div class="burst" aria-label="Lô Lô Chải: Làng du lịch tốt nhất thế giới 2025"><span><b>2025</b>Làng du lịch tốt nhất TG</span></div>
         </figure>
       </div>
@@ -275,28 +276,28 @@
 
           <article class="card day" data-day="2026-11-14">
             <div class="day-top"><div><div class="date">THỨ 7 · 14/11</div><h3>Lô Lô Chải & cột cờ</h3></div><span class="badge-now">HÔM NAY</span></div>
-            <div class="day-photos"><img src="img/lolochai.webp" alt="Làng Lô Lô Chải nhìn từ trên cao" loading="lazy" /><img src="img/lungcu-tall.webp" alt="Cột cờ Lũng Cú" loading="lazy" style="object-position:center 30%" /></div>
+            <div class="day-photos"><img src="img/lolochai.webp" alt="Làng Lô Lô Chải nhìn từ trên cao" loading="lazy" title="Ảnh: NKSTTSSHNVN · CC BY-SA 4.0 · Wikimedia Commons" /><img src="img/lungcu-tall.webp" alt="Cột cờ Lũng Cú" loading="lazy" style="object-position:center 30%" title="Ảnh: Zennysmile · CC BY-SA 4.0 · Wikimedia Commons" /></div>
             <ol class="tl">
               <li><time>05:00</time><div class="what"><b>Tới 100 Trần Phú, TP Hà Giang</b><p>Ăn sáng nóng, thay đồ ấm.</p></div></li>
               <li><time>06:00</time><div class="what"><b>Xe 7 chỗ → Lô Lô Chải</b><p>Đi QL4C qua Quản Bạ, Yên Minh, Đồng Văn. Dừng 5–10 phút ở Cổng Trời Quản Bạ.</p><span class="chip move">khoảng 5 giờ</span></div></li>
               <li><time>11:30</time><div class="what"><b>Nhận phòng Thing 0 Homestay</b><p>Ăn trưa ở Tiệm cơm Vị Nhà.</p><span class="stamp booked">đã đặt</span></div></li>
               <li><time>13:30</time><div class="what"><b>Ô long gạo rang @ Nội Phủ house</b><p>Nghỉ chân sau chặng xe dài.</p></div></li>
-              <li class="key"><time>14:30</time><div class="what"><b>Cột cờ Lũng Cú</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=C%E1%BB%99t+c%E1%BB%9D+L%C5%A9ng+C%C3%BA" target="_blank" rel="noopener">↗ bản đồ</a><p>Vé khoảng 25–30k, xe điện khoảng 15k. Lá cờ rộng 54 m².</p></div></li>
-              <li class="key"><time>16:15</time><div class="what"><b>Cafe Cực Bắc & dạo làng</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Cafe+C%E1%BB%B1c+B%E1%BA%AFc+L%C3%B4+L%C3%B4+Ch%E1%BA%A3i" target="_blank" rel="noopener">↗ bản đồ</a><p>Ngồi ban công đón nắng chiều, rồi đi các ngõ chụp ảnh nhìn lên cột cờ.</p></div></li>
+              <li class="key"><time>14:30</time><div class="what"><b>Cột cờ Lũng Cú</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=C%E1%BB%99t+c%E1%BB%9D+L%C5%A9ng+C%C3%BA" target="_blank" rel="noopener">↗ bản đồ</a><p>Vé khoảng 25–30k, xe điện khoảng 15k. Lá cờ rộng 54 m². Trên đỉnh gió mạnh, giữ chặt điện thoại.</p></div></li>
+              <li class="key"><time>16:15</time><div class="what"><b>Cafe Cực Bắc & dạo làng</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Cafe+C%E1%BB%B1c+B%E1%BA%AFc+L%C3%B4+L%C3%B4+Ch%E1%BA%A3i" target="_blank" rel="noopener">↗ bản đồ</a><p>Ngồi ban công nhìn xuống bản và cột cờ, rồi đi các ngõ chụp ảnh nhìn lên cột cờ.</p></div></li>
               <li><time>18:30</time><div class="what"><b>Cơm tối ở homestay</b><p>Đêm lạnh, nên ngủ sớm.</p></div></li>
             </ol>
           </article>
 
           <article class="card day" data-day="2026-11-15">
             <div class="day-top"><div><div class="date">CHỦ NHẬT · 15/11</div><h3>Đèo & sông</h3></div><span class="badge-now">HÔM NAY</span></div>
-            <div class="day-photos"><img src="img/mapileng-road.webp" alt="Đường đèo Mã Pí Lèng vắt qua sườn núi" loading="lazy" /><img src="img/tusan-river.webp" alt="Hẻm Tu Sản nhìn từ mặt sông" loading="lazy" /></div>
+            <div class="day-photos one"><img src="img/tusan-river.webp" title="Ảnh: NKSTTSSHNVN · CC BY-SA 4.0 · Wikimedia Commons" alt="Hẻm Tu Sản nhìn từ mặt sông" loading="lazy" style="object-position:center 70%" /></div>
             <ol class="tl">
               <li><time>06:15</time><div class="what"><b>Dạo làng lúc sương sớm</b><p>Sau đó trả phòng.</p></div></li>
               <li class="key"><time>08:15</time><div class="what"><b>Chợ phiên Đồng Văn + ăn sáng</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Ph%E1%BB%91+c%E1%BB%95+%C4%90%E1%BB%93ng+V%C4%83n" target="_blank" rel="noopener">↗ bản đồ</a><p>Chợ phiên họp sáng chủ nhật. Gửi đồ trước ở CiCi Homestay.</p><span class="chip move">45′ từ Lô Lô Chải</span></div></li>
-              <li class="key"><time>09:30</time><div class="what"><b>Đỉnh đèo Mã Pí Lèng</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=%C4%90%C3%A8o+M%C3%A3+P%C3%AD+L%C3%A8ng" target="_blank" rel="noopener">↗ bản đồ</a><p>Dừng chụp ảnh 20–30 phút.</p></div></li>
-              <li><time>11:30</time><div class="what"><b>Cơm trưa Quán Anh Quân</b><p>Đặt bàn trước: <a href="tel:0396226225">0396 226 225</a>.</p></div></li>
-              <li class="key"><time>12:30</time><div class="what"><b>Thuyền sông Nho Quế, Hẻm Tu Sản</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=B%E1%BA%BFn+thuy%E1%BB%81n+H%E1%BA%BBm+Tu+S%E1%BA%A3n" target="_blank" rel="noopener">↗ bản đồ</a><p>Mua vé, đi xe điện ra đập, rồi đi bộ khoảng 200 m ra bến. Thuyền chạy khi đủ khách.</p><span class="chip scene">60–90′ · 120k</span></div></li>
-              <li class="key"><time>15:15</time><div class="what"><b>Mã Pì Lèng Panorama</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=M%C3%A3+P%C3%AC+L%C3%A8ng+Panorama" target="_blank" rel="noopener">↗ bản đồ</a><p>Ghé trên đường về, cà phê ngắm Nho Quế trong nắng chiều. Rời quán trước 16:45.</p></div></li>
+              <li class="key"><time>09:30</time><div class="what"><b>Đỉnh đèo Mã Pí Lèng</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=%C4%90%C3%A8o+M%C3%A3+P%C3%AD+L%C3%A8ng" target="_blank" rel="noopener">↗ bản đồ</a><p>Dừng chụp ảnh 20–30 phút. Không trèo ra mép vực.</p></div></li>
+              <li><time>11:30</time><div class="what"><b>Cơm trưa Quán Anh Quân</b><p>Mâm cơm view sông Nho Quế. Đặt bàn trước: <a href="tel:0396226225">0396 226 225</a>.</p></div></li>
+              <li class="key"><time>12:30</time><div class="what"><b>Thuyền sông Nho Quế, Hẻm Tu Sản</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=B%E1%BA%BFn+thuy%E1%BB%81n+H%E1%BA%BBm+Tu+S%E1%BA%A3n" target="_blank" rel="noopener">↗ bản đồ</a><p>Mua vé, đi xe điện ra đập, rồi đi bộ khoảng 200 m ra bến. Thuyền chạy khi đủ khách. Ngồi mũi thuyền để chụp ảnh.</p><span class="chip scene">60–90′ · 120k</span></div></li>
+              <li class="key"><time>15:15</time><div class="what"><b>Mã Pì Lèng Panorama</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=M%C3%A3+P%C3%AC+L%C3%A8ng+Panorama" target="_blank" rel="noopener">↗ bản đồ</a><p>Ghé trên đường về: ra bục cờ chụp ảnh, rồi ngồi cà phê ngắm Nho Quế. Rời quán trước 16:45.</p></div></li>
               <li><time>17:15</time><div class="what"><b>Nhận phòng CiCi Homestay</b><p>Tối dạo phố cổ Đồng Văn lúc lên đèn.</p><span class="stamp booked">đã đặt</span></div></li>
             </ol>
           </article>
@@ -318,57 +319,36 @@
     <section id="goc-chup">
       <div class="wrap">
         <div class="sec-head">
-          <div><h2><span class="num">2</span>Góc chụp</h2><p>3 góc chụp cột cờ · 2 góc Mã Pí Lèng · 1 góc trên sông</p></div>
+          <div><h2><span class="num">2</span>Góc chụp</h2><p>góc cờ ★ · đèo Mã Pí Lèng · sông Nho Quế</p></div>
         </div>
-        <div class="spots">
-          <article class="card spot">
-            <img src="img/lolochai.webp" alt="Mái nhà trình tường Lô Lô Chải" loading="lazy" style="object-position:center 60%" />
-            <div class="body">
-              <h3>Ngõ làng → cột cờ</h3>
-              <p>Đứng trong ngõ, lấy mái nhà trình tường làm tiền cảnh, cột cờ ở phía sau. Đây là góc đặc trưng nhất của chuyến đi.</p>
-              <div class="meta"><span class="chip scene">chiều 14 · sáng sớm 15</span></div>
-            </div>
-          </article>
-          <article class="card spot">
-            <img src="img/lungcu-tall.webp" alt="Cột cờ Lũng Cú" loading="lazy" style="object-position:center 25%" />
-            <div class="body">
-              <h3>Ban công Cafe Cực Bắc</h3>
-              <p>Từ ban công nhìn xuống bản và thấy được cột cờ. Có thể dùng ô cửa sổ tam giác làm khung ảnh.</p>
-              <div class="meta"><span class="chip cafe">16:15–17:30 · 14/11</span></div>
-            </div>
-          </article>
-          <article class="card spot">
-            <img src="img/lungcu-tower.webp" alt="Lá cờ Tổ quốc tung bay trên cột cờ Lũng Cú" loading="lazy" />
-            <div class="body">
-              <h3>Lá cờ 54 m²</h3>
-              <p>Đứng dưới chân cột ngước lên khi cờ bay. Trên đỉnh gió mạnh, nhớ giữ chặt điện thoại.</p>
-              <div class="meta"><span class="chip scene">14:30–16:00 · 14/11</span></div>
-            </div>
-          </article>
-          <article class="card spot">
-            <img src="img/dongvan-bs9.webp" alt="Sông Nho Quế nhìn từ đèo Mã Pí Lèng" loading="lazy" style="object-position:center 55%" />
-            <div class="body">
-              <h3>Mã Pì Lèng Panorama</h3>
-              <p>Ban công giữa lưng đèo nhìn thẳng xuống sông Nho Quế. Ghé buổi chiều để có nắng xiên chiếu vào hẻm vực.</p>
-              <div class="meta"><span class="chip cafe">15:15–16:45 · 15/11</span> <span class="stamp check">gọi xem còn mở</span></div>
-            </div>
-          </article>
-          <article class="card spot">
-            <img src="img/mapileng-pano.webp" alt="Toàn cảnh hẻm vực từ Mã Pí Lèng" loading="lazy" />
-            <div class="body">
-              <h3>Đỉnh đèo Mã Pí Lèng</h3>
-              <p>Con đường Hạnh Phúc vắt ngang vách núi, hẻm Tu Sản ở phía dưới. <b>Không trèo ra mép vực.</b></p>
-              <div class="meta"><span class="chip scene">09:30–10:00 · 15/11</span></div>
-            </div>
-          </article>
-          <article class="card spot">
-            <img src="img/tusan.webp" alt="Hẻm Tu Sản" loading="lazy" />
-            <div class="body">
-              <h3>Hẻm Tu Sản từ thuyền</h3>
-              <p>Khoảng 1 km sau bến là đoạn hẹp nhất, thuyền dừng cho khách chụp ảnh. Ngồi ở mũi thuyền để chụp đẹp nhất.</p>
-              <div class="meta"><span class="chip scene">12:30–14:30 · 15/11</span></div>
-            </div>
-          </article>
+        <div class="bento">
+          <figure class="tile w2 h2">
+            <img src="img/boat.webp" alt="Ngồi mũi thuyền giữa Hẻm Tu Sản, sông Nho Quế" loading="lazy" />
+            <figcaption><b>Mũi thuyền Hẻm Tu Sản</b><span>12:30 · 15/11</span></figcaption>
+          </figure>
+          <figure class="tile h2">
+            <img src="img/anhquan.webp" alt="Mâm cơm nhìn ra sông Nho Quế" loading="lazy" />
+            <figcaption><b>Mâm cơm Anh Quân</b><span>11:30 · 15/11</span></figcaption>
+          </figure>
+          <figure class="tile h2">
+            <img src="img/panorama-flag.webp" alt="Bục cờ ở Mã Pì Lèng Panorama nhìn xuống hẻm vực" loading="lazy" />
+            <span class="flag">★ góc cờ</span>
+            <figcaption><b>Bục cờ Panorama</b><span>15:15 · 15/11</span></figcaption>
+          </figure>
+          <figure class="tile w2">
+            <img src="img/lolochai.webp" alt="Làng Lô Lô Chải dưới chân cột cờ" loading="lazy" style="object-position:center 60%" title="Ảnh: NKSTTSSHNVN · CC BY-SA 4.0 · Wikimedia Commons" />
+            <span class="flag">★ góc cờ</span>
+            <figcaption><b>Ngõ làng Lô Lô Chải → cột cờ</b><span>chiều 14 · sáng sớm 15</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <img src="img/lungcu-tall.webp" alt="Cột cờ Lũng Cú" loading="lazy" style="object-position:center 20%" title="Ảnh: Zennysmile · CC BY-SA 4.0 · Wikimedia Commons" />
+            <span class="flag">★ góc cờ</span>
+            <figcaption><b>Cafe Cực Bắc</b><span>16:15 · 14/11</span></figcaption>
+          </figure>
+          <figure class="tile">
+            <img src="img/mapileng-road.webp" alt="Đường đèo Mã Pí Lèng vắt qua sườn núi" loading="lazy" title="Ảnh: Khánh Hmoong · CC BY 2.0 · Wikimedia Commons" />
+            <figcaption><b>Đỉnh đèo Mã Pí Lèng</b><span>09:30 · 15/11</span></figcaption>
+          </figure>
         </div>
       </div>
     </section>
@@ -435,32 +415,6 @@
       </div>
     </section>
   </main>
-
-  <footer>
-    <div class="wrap">
-      <details class="card">
-        <summary>Nguồn thông tin & giấy phép ảnh</summary>
-        <ol>
-          <li><a href="https://www.vietnamcoracle.com/hanoi-to-ha-giang-sleeper-bus/" target="_blank" rel="noopener">Vietnam Coracle: xe Bằng Phấn</a> · <a href="https://www.vietnamcoracle.com/tu-san-canyon-boat-trip-ha-giang/" target="_blank" rel="noopener">thuyền Tu Sản</a></li>
-          <li><a href="https://vnexpress.net/cam-nang-du-lich-lo-lo-chai-4952798.html" target="_blank" rel="noopener">VnExpress: Lô Lô Chải</a> · <a href="https://mia.vn/cam-nang-du-lich/tiem-cafe-cuc-bac-ha-giang-20360" target="_blank" rel="noopener">Mia.vn: Cafe Cực Bắc</a> · <a href="https://www.vietnamairlines.com/go/vi/plan-book/travel/travel-guide/lung-cu-flag-point" target="_blank" rel="noopener">Vietnam Airlines: cột cờ Lũng Cú</a> · <a href="https://vov.vn/di-san/lam-gi-voi-ma-pi-leng-panorama-khi-gao-da-nau-thanh-com-963924.vov" target="_blank" rel="noopener">VOV: Mã Pì Lèng Panorama</a></li>
-          <li>Thời tiết: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a></li>
-          <li>Ảnh Wikimedia Commons, đã thu nhỏ và nén:
-            <a href="https://commons.wikimedia.org/wiki/File:S%C3%B4ng_Nho_Qu%E1%BA%BF_2022_-_NKS.jpg" target="_blank" rel="noopener">Nho Quế</a>,
-            <a href="https://commons.wikimedia.org/wiki/File:L%C3%B4_L%C3%B4_Ch%E1%BA%A3i_2022_-_NKS.jpg" target="_blank" rel="noopener">Lô Lô Chải</a>,
-            <a href="https://commons.wikimedia.org/wiki/File:TuSan_Canyon.jpg" target="_blank" rel="noopener">Tu Sản</a>,
-            <a href="https://commons.wikimedia.org/wiki/File:Tu_San_abyss_from_the_river.jpg" target="_blank" rel="noopener">Tu Sản từ sông</a> (NKSTTSSHNVN, CC BY-SA 4.0) ·
-            <a href="https://commons.wikimedia.org/wiki/File:Lung_Cu_Flag_Tower.jpg" target="_blank" rel="noopener">Cột cờ</a> (Zennysmile, CC BY-SA 4.0) ·
-            <a href="https://commons.wikimedia.org/wiki/File:Lung_Cu_flag_tower_of_Ha_Giang_in_2014_04.jpg" target="_blank" rel="noopener">Lá cờ</a> (Vuong Tri Binh, CC BY-SA 4.0) ·
-            <a href="https://commons.wikimedia.org/wiki/File:Ma_Pi_Leng_Pass_winding_road_Ha_Giang_Vietnam.jpg" target="_blank" rel="noopener">Đường đèo</a> (Khánh Hmoong, CC BY 2.0) ·
-            <a href="https://commons.wikimedia.org/wiki/File:Ma_Pi_Leng_panorama.jpg" target="_blank" rel="noopener">Mã Pí Lèng</a> (Velvet, CC BY-SA 4.0) ·
-            <a href="https://commons.wikimedia.org/wiki/File:%C4%90%E1%BB%93ng_V%C4%83n,_Vietnam_-_9.jpg" target="_blank" rel="noopener">Nho Quế từ đèo</a> (Benjamin Smith, CC BY-SA 4.0) ·
-            <a href="https://commons.wikimedia.org/wiki/File:Dong_Van_old_town.jpg" target="_blank" rel="noopener">Phố cổ Đồng Văn</a> (HuangWending18072009, CC0) ·
-            giấy phép <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a> / <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener">CC BY 2.0</a>.</li>
-        </ol>
-        <div class="fine">Cập nhật 07/11/2026. Giá và giờ có thể thay đổi, nên gọi xác nhận trước 1–2 ngày.</div>
-      </details>
-    </div>
-  </footer>
 
   <script>
     // ---- countdown (giờ Việt Nam, UTC+7) ----
