@@ -9,12 +9,12 @@
   <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect x='1.5' y='1.5' width='29' height='29' rx='8' fill='%23FFD21E' stroke='%231B1B1F' stroke-width='3'/%3E%3Cpath d='M4 25l8-11 4 5 4-7 8 13z' fill='%231B1B1F'/%3E%3Cpath d='M20 12V4' stroke='%231B1B1F' stroke-width='2'/%3E%3Cpath d='M20 4h6l-2 2.5 2 2.5h-6z' fill='%23E5484D'/%3E%3C/svg%3E" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Be+Vietnam+Pro:wght@400;500;600;700&family=IBM+Plex+Mono:wght@500;600&display=swap" rel="stylesheet" />
   <style>
     :root {
       --paper: #ece9e2; --surface: #fbfaf5; --surface-2: #f4f1e8;
-      --ink: #1b1b1f; --ink-2: #3d3d45; --muted: #63615b; --rule: #d9d5ca;
-      --mark: #ffd21e; --signal: #3b6ff5; --orange: #ff8a1f; --green: #2f8f5b; --red: #e5484d; --violet: #a35bf0;
+      --ink: #1b1b1f; --ink-2: #33333a; --muted: #55534d; --rule: #d9d5ca;
+      --mark: #ffd21e; --signal: #3b6ff5; --green: #2f8f5b; --red: #e5484d;
       --t-scene: #d9efe2; --t-cafe: #ffe3c7; --t-eat: #fbd5d6; --t-move: #dce6fe;
       --line: 2.5px solid var(--ink); --shadow: 5px 5px 0 var(--ink); --shadow-sm: 3px 3px 0 var(--ink);
       --radius: 16px;
@@ -25,216 +25,178 @@
       color-scheme: light;
     }
     * { box-sizing: border-box; }
-    html { scroll-behavior: smooth; scroll-padding-top: 76px; }
-    body { margin: 0; background: var(--paper); color: var(--ink); font: 400 16px/1.55 var(--font); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+    html { scroll-behavior: smooth; scroll-padding-top: 80px; }
+    body { margin: 0; background: var(--paper); color: var(--ink); font: 400 17.5px/1.6 var(--font); -webkit-font-smoothing: antialiased; overflow-x: hidden; }
     a { color: inherit; }
     img { display: block; max-width: 100%; }
-    h1, h2, h3 { font-family: var(--font-display); line-height: 1.08; margin: 0; letter-spacing: -0.01em; }
+    h1, h2, h3 { font-family: var(--font-display); line-height: 1.1; margin: 0; letter-spacing: -0.01em; }
     .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 var(--gutter); }
-    .mono { font-family: var(--font-mono); }
     .card { background: var(--surface); border: var(--line); border-radius: var(--radius); box-shadow: var(--shadow); }
 
     /* top bar */
     .top { position: sticky; top: 0; z-index: 20; background: color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter: blur(6px); border-bottom: var(--line); }
-    .top .wrap { display: flex; align-items: center; gap: 14px; height: 62px; }
+    .top .wrap { display: flex; align-items: center; gap: 14px; height: 64px; }
     .logo { display: flex; align-items: center; gap: 10px; text-decoration: none; flex: none; }
-    .logo svg { width: 34px; height: 34px; }
-    .logo b { font: 800 22px/1 var(--font-display); }
+    .logo svg { width: 36px; height: 36px; }
+    .logo b { font: 800 23px/1 var(--font-display); }
     .logo b span { background: var(--mark); border: 2px solid var(--ink); border-radius: 8px; padding: 1px 7px 0; margin-left: 4px; }
     .nav { display: flex; gap: 8px; overflow-x: auto; scrollbar-width: none; margin-left: auto; padding: 4px 2px; }
     .nav::-webkit-scrollbar { display: none; }
-    .nav a { flex: none; font: 500 13px/1 var(--font-mono); text-decoration: none; padding: 8px 11px; border: 2px solid var(--ink); border-radius: 999px; background: var(--surface); }
+    .nav a { flex: none; font: 600 14.5px/1 var(--font); text-decoration: none; padding: 9px 13px; border: 2px solid var(--ink); border-radius: 999px; background: var(--surface); }
     .nav a:hover { background: var(--mark); }
     .nav a.home { background: var(--ink); color: var(--surface); }
 
     /* hero */
-    .hero { position: relative; padding: 40px 0 28px; }
+    .hero { position: relative; padding: 40px 0 10px; }
     .contours { position: absolute; inset: 0; z-index: -1; opacity: .55; pointer-events: none; overflow: hidden; }
     .hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: 36px; align-items: center; }
-    .kicker { font: 500 13px/1.4 var(--font-mono); color: var(--muted); letter-spacing: .02em; }
-    .title { font-size: clamp(2.9rem, 8vw, 5.4rem); font-weight: 800; margin: 10px 0 8px; }
+    .kicker { font: 600 15px/1.45 var(--font); color: var(--muted); letter-spacing: .02em; }
+    .title { font-size: clamp(3.1rem, 8.5vw, 5.6rem); font-weight: 800; margin: 10px 0 8px; }
     .title .hl { background: var(--mark); border: var(--line); border-radius: 18px; padding: 0 .18em; box-shadow: var(--shadow-sm); display: inline-block; transform: rotate(-1.5deg); }
-    .route { font: 700 clamp(1.15rem, 2.6vw, 1.6rem)/1.25 var(--font-display); margin: 14px 0 6px; }
+    .route { font: 700 clamp(1.3rem, 2.8vw, 1.75rem)/1.3 var(--font-display); margin: 14px 0 8px; }
     .route i { font-style: normal; color: var(--signal); }
-    .pulse { display: inline-flex; align-items: center; gap: 10px; margin-top: 16px; padding: 10px 14px; background: var(--surface); border: var(--line); border-radius: 999px; box-shadow: var(--shadow-sm); font: 500 14px/1.2 var(--font-mono); }
-    .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--red); box-shadow: 0 0 0 0 rgba(229,72,77,.6); animation: ping 1.6s infinite; flex: none; }
-    @keyframes ping { 70% { box-shadow: 0 0 0 10px rgba(229,72,77,0); } 100% { box-shadow: 0 0 0 0 rgba(229,72,77,0); } }
-    .hero-photo { position: relative; }
+    .pulse { display: inline-flex; align-items: center; gap: 10px; margin-top: 18px; padding: 11px 16px; background: var(--surface); border: var(--line); border-radius: 999px; box-shadow: var(--shadow-sm); font: 600 16px/1.25 var(--font); }
+    .dot { width: 11px; height: 11px; border-radius: 50%; background: var(--red); animation: ping 1.6s infinite; flex: none; }
+    @keyframes ping { 0% { box-shadow: 0 0 0 0 rgba(229,72,77,.6); } 70% { box-shadow: 0 0 0 10px rgba(229,72,77,0); } 100% { box-shadow: 0 0 0 0 rgba(229,72,77,0); } }
+    .hero-photo { position: relative; margin: 0; }
     .hero-photo .card { overflow: hidden; }
-    .hero-photo img { aspect-ratio: 4 / 3.1; object-fit: cover; width: 100%; height: auto; }
-    .hero-photo figcaption { font: 400 11.5px/1.3 var(--font-mono); color: var(--muted); padding: 8px 12px; border-top: var(--line); }
-    .burst { position: absolute; top: -26px; right: -14px; width: 138px; height: 138px; display: grid; place-items: center; text-align: center; transform: rotate(10deg); filter: drop-shadow(4px 4px 0 var(--ink)); }
-    .burst::before { content: ""; position: absolute; inset: 0; background: var(--ink); clip-path: polygon(50% 0%, 59% 13%, 75% 6%, 77% 23%, 94% 25%, 87% 40%, 100% 50%, 87% 60%, 94% 75%, 77% 77%, 75% 94%, 59% 87%, 50% 100%, 41% 87%, 25% 94%, 23% 77%, 6% 75%, 13% 60%, 0% 50%, 13% 40%, 6% 25%, 23% 23%, 25% 6%, 41% 13%); }
-    .burst::after { content: ""; position: absolute; inset: 4px; background: var(--red); clip-path: polygon(50% 0%, 59% 13%, 75% 6%, 77% 23%, 94% 25%, 87% 40%, 100% 50%, 87% 60%, 94% 75%, 77% 77%, 75% 94%, 59% 87%, 50% 100%, 41% 87%, 25% 94%, 23% 77%, 6% 75%, 13% 60%, 0% 50%, 13% 40%, 6% 25%, 23% 23%, 25% 6%, 41% 13%); }
-    .burst span { position: relative; z-index: 1; color: #fff; font: 700 13px/1.1 var(--font-display); padding: 0 22px; }
-    .burst span b { display: block; font-size: 24px; font-weight: 800; }
+    .hero-photo img { aspect-ratio: 4 / 3; object-fit: cover; width: 100%; height: auto; }
+    .burst { position: absolute; top: -26px; right: -14px; width: 140px; height: 140px; display: grid; place-items: center; text-align: center; transform: rotate(10deg); filter: drop-shadow(4px 4px 0 var(--ink)); }
+    .burst::before, .burst::after { content: ""; position: absolute; clip-path: polygon(50% 0%, 59% 13%, 75% 6%, 77% 23%, 94% 25%, 87% 40%, 100% 50%, 87% 60%, 94% 75%, 77% 77%, 75% 94%, 59% 87%, 50% 100%, 41% 87%, 25% 94%, 23% 77%, 6% 75%, 13% 60%, 0% 50%, 13% 40%, 6% 25%, 23% 23%, 25% 6%, 41% 13%); }
+    .burst::before { inset: 0; background: var(--ink); }
+    .burst::after { inset: 4px; background: var(--red); }
+    .burst span { position: relative; z-index: 1; color: #fff; font: 700 13.5px/1.1 var(--font-display); padding: 0 22px; }
+    .burst span b { display: block; font-size: 25px; font-weight: 800; }
 
-    /* stats */
-    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 30px 0 8px; }
-    .stat { padding: 14px 16px; }
-    .stat b { display: block; font: 800 clamp(1.7rem, 3.4vw, 2.3rem)/1 var(--font-display); }
-    .stat span { display: block; margin-top: 6px; font: 400 12.5px/1.35 var(--font-mono); color: var(--muted); }
+    /* stats + weather */
+    .stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin: 30px 0 0; }
+    .stat { padding: 16px 18px; }
+    .stat b { display: block; font: 800 clamp(1.9rem, 3.6vw, 2.5rem)/1 var(--font-display); }
+    .stat span { display: block; margin-top: 8px; font-size: 15.5px; line-height: 1.4; color: var(--ink-2); }
+    .wx-card { margin-top: 22px; padding: 18px 20px; display: grid; grid-template-columns: 220px 1fr; gap: 20px; align-items: center; }
+    .wx-card h3 { font-size: 1.5rem; font-weight: 800; }
+    .wx-card .sub { font-size: 15px; color: var(--muted); margin-top: 4px; }
+    .wx-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .wx-place { border: 2px solid var(--ink); border-radius: 12px; padding: 10px 12px; background: var(--surface-2); }
+    .wx-place h4 { margin: 0 0 6px; font: 700 16.5px/1.2 var(--font); }
+    .wx-place h4 small { font: 500 13px var(--font-mono); color: var(--muted); margin-left: 4px; }
+    .wx-day { display: flex; justify-content: space-between; gap: 8px; font-size: 15.5px; padding: 3px 0; }
+    .wx-day b { font: 700 17px/1.3 var(--font-display); }
+    .wx-day span { color: var(--muted); }
 
     /* sections */
-    section { padding: 34px 0; }
-    .sec-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 18px; }
-    .sec-head h2 { font-size: clamp(1.8rem, 4.2vw, 2.5rem); font-weight: 800; }
-    .sec-head p { margin: 4px 0 0; font: 400 13px/1.4 var(--font-mono); color: var(--muted); }
+    section { padding: 40px 0; }
+    .sec-head { display: flex; align-items: end; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; }
+    .sec-head h2 { font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 800; }
+    .sec-head p { margin: 4px 0 0; font-size: 16px; color: var(--muted); }
     .num { display: inline-grid; place-items: center; width: 1.25em; height: 1.25em; margin-right: 8px; background: var(--mark); border: var(--line); border-radius: 10px; font-size: .8em; vertical-align: .08em; }
-
-    /* weather + chart row */
-    .duo { display: grid; grid-template-columns: .9fr 1.1fr; gap: 20px; }
-    .panel { padding: 18px 18px 16px; }
-    .panel h3 { font-size: 1.35rem; font-weight: 700; }
-    .panel .sub { font: 400 12px/1.4 var(--font-mono); color: var(--muted); margin: 2px 0 14px; }
-    .wx { width: 100%; border-collapse: collapse; font-size: 14px; }
-    .wx th, .wx td { text-align: left; padding: 9px 6px; border-bottom: 1.5px dashed var(--rule); vertical-align: top; }
-    .wx th { font: 500 11.5px/1.2 var(--font-mono); color: var(--muted); text-transform: uppercase; letter-spacing: .04em; }
-    .wx td b { font: 700 17px/1 var(--font-display); }
-    .wx td small { display: block; font: 400 11.5px/1.3 var(--font-mono); color: var(--muted); margin-top: 3px; }
-    .wx tr:last-child td { border-bottom: 0; }
-    .note { font: 400 12.5px/1.45 var(--font-mono); color: var(--ink-2); background: var(--surface-2); border: 2px solid var(--ink); border-radius: 10px; padding: 9px 11px; margin-top: 12px; }
-
-    .bars { display: grid; gap: 10px; }
-    .bar-row { display: grid; grid-template-columns: 158px 1fr; gap: 10px; align-items: center; }
-    .bar-row .lbl { font: 500 12.5px/1.25 var(--font-mono); }
-    .bar-row .lbl em { font-style: normal; font-size: 10.5px; background: var(--ink); color: var(--surface); border-radius: 4px; padding: 1px 4px; margin-left: 4px; }
-    .track { position: relative; display: flex; align-items: center; gap: 8px; min-width: 0; }
-    .bar { position: relative; height: 22px; background: var(--signal); border: 2px solid var(--ink); border-left-width: 2px; border-radius: 2px 6px 6px 2px; outline: none; cursor: default; min-width: 10px; flex: none; }
-    .bar:hover, .bar:focus-visible { background: #2c5ee6; }
-    .track .val { font: 600 12.5px/1 var(--font-mono); white-space: nowrap; }
-    .tip { position: absolute; left: 0; bottom: calc(100% + 8px); width: max-content; max-width: 240px; background: var(--ink); color: var(--surface); font: 400 12px/1.4 var(--font-mono); padding: 8px 10px; border-radius: 8px; opacity: 0; transform: translateY(4px); transition: .12s; pointer-events: none; z-index: 5; }
-    .bar:hover .tip, .bar:focus .tip { opacity: 1; transform: none; }
-    .axis { display: grid; grid-template-columns: 158px 1fr; gap: 10px; margin-top: 4px; }
-    .axis div { display: flex; justify-content: space-between; font: 400 11px/1 var(--font-mono); color: var(--muted); border-top: 1.5px solid var(--rule); padding-top: 5px; }
+    .btn { display: inline-flex; align-items: center; gap: 6px; font: 600 15px/1 var(--font); text-decoration: none; padding: 10px 14px; border: 2px solid var(--ink); border-radius: 999px; background: var(--surface); box-shadow: 2px 2px 0 var(--ink); }
+    .btn:hover { background: var(--mark); }
 
     /* itinerary */
-    .days { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px; align-items: start; }
-    .day { overflow: hidden; display: flex; flex-direction: column; }
+    .days { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; align-items: start; }
+    .day { overflow: hidden; }
     .day.now { box-shadow: 0 0 0 4px var(--mark), 8px 8px 0 var(--ink); }
-    .day-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 14px 16px; border-bottom: var(--line); background: var(--surface-2); }
-    .day-top .date { font: 500 12.5px/1.2 var(--font-mono); }
-    .day-top h3 { font-size: 1.45rem; font-weight: 800; }
-    .badge-now { display: none; font: 600 11px/1 var(--font-mono); background: var(--red); color: #fff; border: 2px solid var(--ink); border-radius: 999px; padding: 5px 8px; }
+    .day-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; padding: 14px 18px; border-bottom: var(--line); background: var(--surface-2); }
+    .day-top .date { font: 600 14px/1.2 var(--font-mono); }
+    .day-top h3 { font-size: 1.65rem; font-weight: 800; }
+    .badge-now { display: none; font: 700 12.5px/1 var(--font); background: var(--red); color: #fff; border: 2px solid var(--ink); border-radius: 999px; padding: 6px 9px; }
     .day.now .badge-now { display: inline-block; }
     .day-photos { display: grid; grid-template-columns: 1.6fr 1fr; border-bottom: var(--line); }
-    .day-photos img { width: 100%; height: 150px; object-fit: cover; }
+    .day-photos.one { grid-template-columns: 1fr; }
+    .day-photos img { width: 100%; height: 170px; object-fit: cover; }
     .day-photos img + img { border-left: var(--line); }
-    .tl { list-style: none; margin: 0; padding: 14px 16px 16px; flex: 1; }
-    .tl li { position: relative; display: grid; grid-template-columns: 54px 1fr; gap: 10px; padding: 0 0 14px; }
-    .tl li::before { content: ""; position: absolute; left: 66px; top: 8px; bottom: -4px; width: 2.5px; background: var(--ink); }
+    .tl { list-style: none; margin: 0; padding: 18px 18px 8px; }
+    .tl li { position: relative; display: grid; grid-template-columns: 62px 1fr; gap: 10px; padding: 0 0 18px; }
+    .tl li::before { content: ""; position: absolute; left: 74px; top: 10px; bottom: -6px; width: 2.5px; background: var(--ink); }
     .tl li:last-child::before { display: none; }
-    .tl li::after { content: ""; position: absolute; left: 61px; top: 4px; width: 12px; height: 12px; border-radius: 50%; background: var(--surface); border: 2.5px solid var(--ink); }
+    .tl li::after { content: ""; position: absolute; left: 68px; top: 6px; width: 13px; height: 13px; border-radius: 50%; background: var(--surface); border: 2.5px solid var(--ink); }
     .tl li.key::after { background: var(--mark); }
-    .tl time { font: 600 12.5px/1.6 var(--font-mono); }
-    .tl .what { padding-left: 22px; }
-    .tl .what b { font-weight: 600; }
-    .tl .what p { margin: 2px 0 0; font-size: 14px; color: var(--ink-2); }
-    .tl .what a { font-weight: 600; text-decoration-thickness: 2px; text-underline-offset: 2px; }
-    .opt { border: 2px dashed var(--ink); border-radius: 12px; padding: 10px 12px; margin: 6px 0 2px; background: var(--surface-2); font-size: 14px; }
-    .opt + .opt { margin-top: 8px; }
-    .opt b { font-family: var(--font-display); font-size: 16px; }
+    .tl time { font: 600 15px/1.6 var(--font-mono); }
+    .tl .what { padding-left: 24px; }
+    .tl .what b { font-weight: 700; font-size: 18px; }
+    .tl .what p { margin: 3px 0 6px; font-size: 16.5px; color: var(--ink-2); }
+    .tl .what a { font-weight: 600; text-decoration-thickness: 2px; text-underline-offset: 3px; }
+    .map { font: 600 14px/1 var(--font); color: var(--signal); text-decoration: none !important; white-space: nowrap; margin-left: 4px; }
 
     /* chips */
-    .chip { display: inline-block; font: 500 11.5px/1 var(--font-mono); padding: 4px 7px; border: 1.5px solid var(--ink); border-radius: 6px; background: var(--surface); white-space: nowrap; vertical-align: 1px; }
+    .chip { display: inline-block; font: 600 13.5px/1 var(--font); padding: 5px 8px; border: 1.5px solid var(--ink); border-radius: 7px; background: var(--surface); white-space: nowrap; }
     .chip.scene { background: var(--t-scene); } .chip.cafe { background: var(--t-cafe); } .chip.eat { background: var(--t-eat); } .chip.move { background: var(--t-move); }
-    .stamp { display: inline-block; font: 600 10.5px/1 var(--font-mono); letter-spacing: .05em; text-transform: uppercase; padding: 4px 6px; border: 2px solid currentColor; border-radius: 5px; transform: rotate(-3deg); white-space: nowrap; }
-    .stamp.ok { color: var(--green); } .stamp.call { color: #b25e00; } .stamp.check { color: var(--red); } .stamp.booked { color: var(--signal); }
-
-    /* signature board */
-    .filters { display: flex; gap: 8px; flex-wrap: wrap; }
-    .filters button { font: 500 13px/1 var(--font-mono); padding: 8px 12px; border: 2px solid var(--ink); border-radius: 999px; background: var(--surface); cursor: pointer; color: var(--ink); }
-    .filters button[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
-    .board { overflow: hidden; }
-    .row { display: grid; grid-template-columns: 46px 1.5fr 92px 1fr 1.6fr 112px; gap: 12px; align-items: center; padding: 13px 16px; border-bottom: 1.5px dashed var(--rule); }
-    .row:last-child { border-bottom: 0; }
-    .row.head { background: var(--surface-2); border-bottom: var(--line); font: 500 11.5px/1.2 var(--font-mono); color: var(--muted); text-transform: uppercase; letter-spacing: .04em; padding-top: 10px; padding-bottom: 10px; }
-    .rank { font: 800 22px/1 var(--font-display); }
-    .row .place b { font-weight: 600; }
-    .row .place a { display: inline-block; margin-top: 2px; font: 500 12px/1.2 var(--font-mono); color: var(--signal); }
-    .row .when { font: 500 13px/1.35 var(--font-mono); }
-    .row .why { font-size: 14px; color: var(--ink-2); }
-    .row[hidden] { display: none; }
+    .stamp { display: inline-block; font: 700 12.5px/1 var(--font); letter-spacing: .04em; text-transform: uppercase; padding: 5px 7px; border: 2px solid currentColor; border-radius: 6px; transform: rotate(-3deg); white-space: nowrap; }
+    .stamp.check { color: #c7282e; } .stamp.booked { color: var(--signal); }
 
     /* photo spots */
-    .spots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+    .spots { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
     .spot { overflow: hidden; display: flex; flex-direction: column; }
-    .spot img { width: 100%; height: 190px; object-fit: cover; border-bottom: var(--line); }
-    .spot .body { padding: 14px 16px 16px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
-    .spot h3 { font-size: 1.22rem; font-weight: 700; }
-    .spot p { margin: 0; font-size: 14px; color: var(--ink-2); }
-    .spot .meta { margin-top: auto; padding-top: 6px; display: flex; gap: 6px; flex-wrap: wrap; }
-    .spot .credit { font: 400 10.5px/1.3 var(--font-mono); color: var(--muted); }
+    .spot img { width: 100%; height: 200px; object-fit: cover; border-bottom: var(--line); }
+    .spot .body { padding: 16px 18px 18px; display: flex; flex-direction: column; gap: 8px; flex: 1; }
+    .spot h3 { font-size: 1.4rem; font-weight: 800; }
+    .spot p { margin: 0; font-size: 16.5px; color: var(--ink-2); }
+    .spot .meta { margin-top: auto; padding-top: 4px; display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
 
     /* tickets */
-    .tickets { display: grid; gap: 20px; }
-    .ticket { display: grid; grid-template-columns: 210px 1fr; overflow: visible; }
-    .stub { position: relative; padding: 16px; border-right: 2.5px dashed var(--ink); background: var(--mark); border-radius: 14px 0 0 14px; }
+    .tickets { display: grid; gap: 22px; }
+    .ticket { display: grid; grid-template-columns: 220px 1fr; }
+    .stub { position: relative; padding: 18px; border-right: 2.5px dashed var(--ink); background: var(--mark); border-radius: 14px 0 0 14px; }
     .ticket.alt .stub { background: var(--t-move); }
     .ticket.back .stub { background: var(--t-scene); }
     .stub::before, .stub::after { content: ""; position: absolute; right: -14px; width: 24px; height: 24px; border-radius: 50%; background: var(--paper); border: var(--line); }
     .stub::before { top: -14px; clip-path: inset(50% 0 0 0); }
     .stub::after { bottom: -14px; clip-path: inset(0 0 50% 0); }
-    .stub .leg { font: 800 1.55rem/1.05 var(--font-display); }
-    .stub .leg small { display: block; font: 500 12px/1.3 var(--font-mono); margin-top: 8px; }
-    .ticket .info { padding: 16px 18px; }
-    .ticket .info h3 { font-size: 1.3rem; font-weight: 700; display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
-    .kv { display: grid; grid-template-columns: 110px 1fr; gap: 6px 12px; margin: 10px 0 0; font-size: 14px; }
-    .kv dt { font: 500 12px/1.6 var(--font-mono); color: var(--muted); }
+    .stub .leg { font: 800 1.75rem/1.05 var(--font-display); }
+    .stub .leg small { display: block; font: 600 14.5px/1.4 var(--font); margin-top: 10px; }
+    .ticket .info { padding: 18px 20px; }
+    .ticket .info h3 { font-size: 1.45rem; font-weight: 800; }
+    .kv { display: grid; grid-template-columns: 110px 1fr; gap: 8px 14px; margin: 12px 0 0; font-size: 16.5px; }
+    .kv dt { font: 600 14px/1.75 var(--font-mono); color: var(--muted); }
     .kv dd { margin: 0; }
-    .tel { display: inline-flex; align-items: center; gap: 6px; font: 600 13px/1 var(--font-mono); text-decoration: none; padding: 7px 10px; border: 2px solid var(--ink); border-radius: 999px; background: var(--surface); box-shadow: 2px 2px 0 var(--ink); margin: 4px 6px 0 0; }
+    .tel { display: inline-flex; align-items: center; gap: 6px; font: 600 15px/1 var(--font-mono); text-decoration: none; padding: 8px 12px; border: 2px solid var(--ink); border-radius: 999px; background: var(--surface); box-shadow: 2px 2px 0 var(--ink); }
     .tel:hover { background: var(--mark); }
 
-    /* review */
-    .review { display: grid; grid-template-columns: 1fr 1.35fr; gap: 20px; }
-    .review .panel ul { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 10px; }
-    .review li { display: grid; grid-template-columns: 26px 1fr; gap: 8px; font-size: 14.5px; }
-    .review li .ic { width: 24px; height: 24px; display: grid; place-items: center; border: 2px solid var(--ink); border-radius: 7px; font: 700 13px/1 var(--font-mono); }
-    .review .keep .ic { background: var(--t-scene); }
-    .review .fix .ic { background: var(--mark); }
-    .review li b { font-weight: 600; }
-
-    /* packing */
-    .pack { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px 22px; padding: 18px; }
-    .pack label { display: grid; grid-template-columns: 26px 1fr; gap: 10px; align-items: start; font-size: 14.5px; cursor: pointer; padding: 6px 0; border-bottom: 1.5px dashed var(--rule); }
-    .pack input { appearance: none; width: 22px; height: 22px; margin: 1px 0 0; border: 2.5px solid var(--ink); border-radius: 6px; background: var(--surface); display: grid; place-items: center; cursor: pointer; }
-    .pack input:checked { background: var(--mark); }
-    .pack input:checked::after { content: ""; width: 9px; height: 5px; border-left: 2.5px solid var(--ink); border-bottom: 2.5px solid var(--ink); transform: rotate(-45deg) translate(1px, -1px); }
-    .pack input:checked + span { text-decoration: line-through; color: var(--muted); }
-    .pack small { display: block; font: 400 12px/1.35 var(--font-mono); color: var(--muted); }
-    .progress { font: 600 13px/1 var(--font-mono); padding: 8px 12px; background: var(--surface); border: 2px solid var(--ink); border-radius: 999px; }
+    /* checklists */
+    .lists { display: grid; grid-template-columns: 1fr 1.25fr; gap: 22px; align-items: start; }
+    .list { padding: 18px 20px 12px; }
+    .list-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-bottom: 6px; }
+    .list-head h3 { font-size: 1.5rem; font-weight: 800; }
+    .progress { font: 600 14px/1 var(--font-mono); padding: 7px 11px; background: var(--surface-2); border: 2px solid var(--ink); border-radius: 999px; white-space: nowrap; }
+    .checks { display: grid; }
+    .checks label { display: grid; grid-template-columns: 28px 1fr; gap: 12px; align-items: start; font-size: 17px; font-weight: 500; cursor: pointer; padding: 10px 0; border-bottom: 1.5px dashed var(--rule); }
+    .checks label:last-child { border-bottom: 0; }
+    .checks input { appearance: none; width: 24px; height: 24px; margin: 1px 0 0; border: 2.5px solid var(--ink); border-radius: 6px; background: var(--surface); display: grid; place-items: center; cursor: pointer; }
+    .checks input:checked { background: var(--mark); }
+    .checks input:checked::after { content: ""; width: 10px; height: 5px; border-left: 2.5px solid var(--ink); border-bottom: 2.5px solid var(--ink); transform: rotate(-45deg) translate(1px, -1px); }
+    .checks input:checked + span { text-decoration: line-through; color: var(--muted); }
+    .checks small { display: block; font-size: 15px; font-weight: 400; color: var(--muted); margin-top: 1px; }
+    .checks a { font-weight: 600; }
 
     /* footer */
-    footer { padding: 30px 0 56px; }
-    footer .card { padding: 18px; }
-    footer h3 { font-size: 1.2rem; margin-bottom: 8px; }
-    footer ol { margin: 0; padding-left: 20px; font: 400 12px/1.6 var(--font-mono); color: var(--ink-2); columns: 2; column-gap: 28px; }
-    footer li { break-inside: avoid; }
-    footer .fine { margin-top: 18px; font: 400 12px/1.5 var(--font-mono); color: var(--muted); }
+    footer { padding: 10px 0 56px; }
+    footer details { padding: 14px 18px; }
+    footer summary { cursor: pointer; font: 700 16px/1.4 var(--font); }
+    footer ol { margin: 12px 0 0; padding-left: 20px; font-size: 14.5px; line-height: 1.6; color: var(--ink-2); }
+    footer .fine { margin-top: 14px; font-size: 14.5px; color: var(--muted); }
 
     @media (max-width: 900px) {
-      .hero-grid, .duo, .review { grid-template-columns: 1fr; }
+      .hero-grid, .lists { grid-template-columns: 1fr; }
       .stats { grid-template-columns: repeat(2, 1fr); }
       .days, .spots { grid-template-columns: 1fr; }
-      .row.head { display: none; }
-      .row { grid-template-columns: 40px 1fr auto; grid-template-areas: "r p s" "r t w" "r y y"; gap: 6px 10px; }
-      .row .rank { grid-area: r; align-self: start; }
-      .row .place { grid-area: p; } .row .type { grid-area: t; } .row .when { grid-area: w; text-align: right; }
-      .row .why { grid-area: y; } .row .status { grid-area: s; align-self: start; }
-      footer ol { columns: 1; }
+      .wx-card { grid-template-columns: 1fr; }
     }
     @media (max-width: 620px) {
-      .burst { width: 112px; height: 112px; top: -30px; right: -6px; }
-      .burst span { font-size: 11px; padding: 0 18px; } .burst span b { font-size: 19px; }
-      .bar-row, .axis { grid-template-columns: 1fr; gap: 4px; }
-      .axis > span { display: none; }
+      body { font-size: 17px; }
+      .burst { width: 114px; height: 114px; top: -30px; right: -6px; }
+      .burst span { font-size: 11.5px; padding: 0 18px; } .burst span b { font-size: 20px; }
+      .wx-grid { grid-template-columns: 1fr; }
       .ticket { grid-template-columns: 1fr; }
       .stub { border-right: 0; border-bottom: 2.5px dashed var(--ink); border-radius: 14px 14px 0 0; }
       .stub::before, .stub::after { display: none; }
-      .kv { grid-template-columns: 1fr; gap: 0; } .kv dd { margin-bottom: 8px; }
-      .pack { grid-template-columns: 1fr; }
-      .day-photos img { height: 120px; }
-      .logo b { font-size: 19px; }
+      .kv { grid-template-columns: 1fr; gap: 0; } .kv dd { margin-bottom: 10px; }
+      .day-photos img { height: 140px; }
+      .tl { padding: 16px 14px 6px; }
+      .tl li { grid-template-columns: 56px 1fr; }
+      .tl li::before { left: 68px; } .tl li::after { left: 62px; }
+      .tl .what { padding-left: 22px; }
+      .logo b { font-size: 20px; }
     }
     @media (prefers-reduced-motion: reduce) { .dot { animation: none; } html { scroll-behavior: auto; } }
   </style>
@@ -248,11 +210,9 @@
       </a>
       <nav class="nav" aria-label="Mục lục">
         <a href="#lich-trinh">Lịch trình</a>
-        <a href="#signature">Signature</a>
         <a href="#goc-chup">Góc chụp</a>
         <a href="#di-chuyen">Xe & vé</a>
-        <a href="#review">Review</a>
-        <a href="#mang-theo">Mang theo</a>
+        <a href="#chuan-bi">Chuẩn bị</a>
         <a class="home" href="../">← Trang chính</a>
       </nav>
     </div>
@@ -269,68 +229,47 @@
           <path d="M-20 260 C 140 170 340 310 520 220 S 860 90 1220 170"/>
           <path d="M-20 220 C 130 130 350 270 520 180 S 860 50 1220 130"/>
           <path d="M-20 180 C 120 90 360 230 520 140 S 860 10 1220 90"/>
-          <path d="M-20 140 C 110 50 370 190 520 100 S 860 -30 1220 50"/>
         </g>
       </svg>
       <div class="wrap hero-grid">
         <div>
-          <div class="kicker">HÀ GIANG (NAY THUỘC TUYÊN QUANG) · 13–16.11.2026</div>
+          <div class="kicker">HÀ GIANG · 13–16.11.2026</div>
           <h1 class="title">Lên <span class="hl">Cực Bắc</span></h1>
           <p class="route">Hà Nội <i>→</i> Lô Lô Chải <i>→</i> Mã Pí Lèng <i>→</i> Nho Quế <i>→</i> Đồng Văn <i>→</i> Hà Nội</p>
-          <div class="kicker">1 đêm xe giường nằm · 2 đêm homestay (Lô Lô Chải, Đồng Văn) · 9 điểm signature</div>
-          <div class="pulse" id="pulse" role="status"><span class="dot"></span><span id="pulse-text">Đang tính giờ lên xe…</span></div>
+          <div class="kicker">1 đêm xe · 2 đêm homestay</div>
+          <div class="pulse" role="status"><span class="dot"></span><span id="pulse-text">Đang tính giờ lên xe…</span></div>
         </div>
-        <figure class="hero-photo" style="margin:0">
-          <div class="card">
-            <img src="img/nhoque.webp" alt="Sông Nho Quế uốn lượn dưới hẻm vực đá vôi" width="1400" height="933" />
-            <figcaption>Sông Nho Quế · ảnh: NKSTTSSHNVN / CC BY-SA 4.0</figcaption>
-          </div>
+        <figure class="hero-photo">
+          <div class="card"><img src="img/nhoque.webp" alt="Sông Nho Quế uốn lượn dưới hẻm vực đá vôi" width="1400" height="933" /></div>
           <div class="burst" aria-label="Lô Lô Chải: Làng du lịch tốt nhất thế giới 2025"><span><b>2025</b>Làng du lịch tốt nhất TG</span></div>
         </figure>
       </div>
       <div class="wrap">
         <div class="stats">
-          <div class="card stat"><b>154 km</b><span>TP Hà Giang → Lô Lô Chải, ~5 giờ đường đèo</span></div>
-          <div class="card stat"><b>1.470 m</b><span>độ cao làng Lô Lô Chải, dưới chân cột cờ</span></div>
-          <div class="card stat"><b>8:00–17:00</b><span>giờ mở cột cờ Lũng Cú → đi chiều 14/11</span></div>
-          <div class="card stat"><b>120k</b><span>vé thuyền Hẻm Tu Sản / người lớn, 60–90 phút</span></div>
+          <div class="card stat"><b>154 km</b><span>TP Hà Giang → Lô Lô Chải, khoảng 5 giờ</span></div>
+          <div class="card stat"><b>1.470 m</b><span>độ cao làng Lô Lô Chải</span></div>
+          <div class="card stat"><b>8:00–17:00</b><span>giờ mở cột cờ Lũng Cú</span></div>
+          <div class="card stat"><b>120k</b><span>vé thuyền Tu Sản, 60–90 phút</span></div>
+        </div>
+        <div class="card wx-card">
+          <div><h3>Thời tiết</h3><div class="sub" id="wx-sub">Dự báo trực tiếp</div></div>
+          <div class="wx-grid" id="wx"><div class="wx-place"><div class="wx-day"><span>Đang tải dự báo…</span></div></div></div>
         </div>
       </div>
     </div>
 
-    <section>
-      <div class="wrap duo">
-        <div class="card panel">
-          <h3>Thời tiết 14–15/11</h3>
-          <div class="sub" id="wx-sub">dự báo trực tiếp · Open-Meteo</div>
-          <table class="wx" id="wx" aria-live="polite">
-            <thead><tr><th>Nơi</th><th>T7 · 14/11</th><th>CN · 15/11</th></tr></thead>
-            <tbody><tr><td colspan="3"><small>Đang tải dự báo…</small></td></tr></tbody>
-          </table>
-          <div class="note">Tháng 11 khô, ít mưa; sáng sớm hay có sương. Trên cao nguyên đêm có thể xuống dưới 10°C → áo ấm là bắt buộc.</div>
-        </div>
-        <div class="card panel">
-          <h3>Nhịp di chuyển</h3>
-          <div class="sub">số giờ ngồi xe/thuyền mỗi chặng · rê chuột hoặc chạm vào thanh để xem chi tiết</div>
-          <div class="bars" id="bars"></div>
-          <div class="axis"><span></span><div><span>0h</span><span>2h</span><span>4h</span><span>6h</span><span>8h</span></div></div>
-          <div class="note">Tổng ≈ 26 giờ ngồi xe. Hai chặng dài rơi vào đêm 13 và ngày 16, còn ngày 15 chỉ gồm các chặng ngắn.</div>
-        </div>
-      </div>
-    </section>
-
     <section id="lich-trinh">
       <div class="wrap">
         <div class="sec-head">
-          <div><h2><span class="num">1</span>Lịch trình</h2><p>đi đêm T6 13/11 → về T2 16/11 · ● vàng = điểm signature</p></div>
-          <a class="tel" href="https://www.google.com/maps/dir/?api=1&origin=L%C3%B4+L%C3%B4+Ch%E1%BA%A3i&destination=Ph%E1%BB%91+c%E1%BB%95+%C4%90%E1%BB%93ng+V%C4%83n&waypoints=%C4%90%C3%A8o+M%C3%A3+P%C3%AD+L%C3%A8ng%7CB%E1%BA%BFn+thuy%E1%BB%81n+H%E1%BA%BBm+Tu+S%E1%BA%A3n&travelmode=driving" target="_blank" rel="noopener">↗ Tuyến 15/11 trên Google Maps</a>
+          <div><h2><span class="num">1</span>Lịch trình</h2><p>● vàng = điểm signature</p></div>
+          <a class="btn" href="https://www.google.com/maps/dir/?api=1&origin=L%C3%B4+L%C3%B4+Ch%E1%BA%A3i&destination=Ph%E1%BB%91+c%E1%BB%95+%C4%90%E1%BB%93ng+V%C4%83n&waypoints=%C4%90%C3%A8o+M%C3%A3+P%C3%AD+L%C3%A8ng%7CB%E1%BA%BFn+thuy%E1%BB%81n+H%E1%BA%BBm+Tu+S%E1%BA%A3n&travelmode=driving" target="_blank" rel="noopener">↗ Tuyến ngày 15/11</a>
         </div>
         <div class="days">
           <article class="card day" data-day="2026-11-13">
             <div class="day-top"><div><div class="date">THỨ 6 · 13/11 · ĐÊM</div><h3>Lên đường</h3></div><span class="badge-now">HÔM NAY</span></div>
             <ol class="tl">
-              <li><time>20:30</time><div class="what"><b>Có mặt điểm đón Bằng Phấn</b><p>Nội Bài, 156 Trần Quang Khải hoặc bến Mỹ Đình. Ra sớm 30–60 phút.</p></div></li>
-              <li class="key"><time>21–22h</time><div class="what"><b>Xe đêm Hà Nội → TP Hà Giang</b><p>Nên đặt <b>cabin</b> để ngủ được. Đặt chuyến khuya nhất để không tới Hà Giang quá sớm. Đường đèo nên mang thuốc say xe.</p><span class="chip move">6–7 giờ</span></div></li>
+              <li><time>20:30</time><div class="what"><b>Có mặt điểm đón Bằng Phấn</b><p>Nội Bài, 156 Trần Quang Khải hoặc bến Mỹ Đình.</p></div></li>
+              <li class="key"><time>21–22h</time><div class="what"><b>Xe đêm Hà Nội → TP Hà Giang</b><p>Nên chọn cabin để ngủ được.</p><span class="chip move">6–7 giờ</span></div></li>
             </ol>
           </article>
 
@@ -338,13 +277,13 @@
             <div class="day-top"><div><div class="date">THỨ 7 · 14/11</div><h3>Lô Lô Chải & cột cờ</h3></div><span class="badge-now">HÔM NAY</span></div>
             <div class="day-photos"><img src="img/lolochai.webp" alt="Làng Lô Lô Chải nhìn từ trên cao" loading="lazy" /><img src="img/lungcu-tall.webp" alt="Cột cờ Lũng Cú" loading="lazy" style="object-position:center 30%" /></div>
             <ol class="tl">
-              <li><time>05:00</time><div class="what"><b>Tới 100 Trần Phú, TP Hà Giang</b><p>Ăn sáng nóng gần văn phòng nhà xe, đi vệ sinh, thay đồ ấm.</p></div></li>
-              <li><time>06:00</time><div class="what"><b>Xe 7 chỗ → Lô Lô Chải</b><p>Khoảng 154 km theo QL4C, qua Quản Bạ, Yên Minh, Đồng Văn. Nhờ tài xế dừng 5–10 phút ở Cổng Trời Quản Bạ.</p><span class="chip move">~5 giờ</span></div></li>
+              <li><time>05:00</time><div class="what"><b>Tới 100 Trần Phú, TP Hà Giang</b><p>Ăn sáng nóng, thay đồ ấm.</p></div></li>
+              <li><time>06:00</time><div class="what"><b>Xe 7 chỗ → Lô Lô Chải</b><p>Đi QL4C qua Quản Bạ, Yên Minh, Đồng Văn. Dừng 5–10 phút ở Cổng Trời Quản Bạ.</p><span class="chip move">khoảng 5 giờ</span></div></li>
               <li><time>11:30</time><div class="what"><b>Nhận phòng Thing 0 Homestay</b><p>Ăn trưa ở Tiệm cơm Vị Nhà.</p><span class="stamp booked">đã đặt</span></div></li>
-              <li><time>13:30</time><div class="what"><b>Ô long gạo rang @ Nội Phủ house</b><p>Nghỉ chân sau 7 tiếng xe đêm và 5 tiếng xe ngày.</p><span class="chip cafe">cafe</span></div></li>
-              <li class="key"><time>14:30</time><div class="what"><b>Cột cờ Lũng Cú, điểm cực Bắc</b><p>Mở 8:00–17:00. Vé khoảng 25–30k, xe điện khoảng 15k/lượt. Lá cờ rộng 54 m², tượng trưng cho 54 dân tộc.</p><span class="chip scene">cảnh</span></div></li>
-              <li class="key"><time>16:15</time><div class="what"><b>Cafe Cực Bắc & dạo làng</b><p>Ngồi ban công đón nắng chiều, rồi đi các ngõ tường trình chụp ảnh nhìn lên cột cờ.</p><span class="chip cafe">cafe</span></div></li>
-              <li><time>18:30</time><div class="what"><b>Cơm tối ở homestay</b><p>Đêm lạnh. Ngủ sớm để sáng mai dậy dạo làng lúc có sương.</p></div></li>
+              <li><time>13:30</time><div class="what"><b>Ô long gạo rang @ Nội Phủ house</b><p>Nghỉ chân sau chặng xe dài.</p></div></li>
+              <li class="key"><time>14:30</time><div class="what"><b>Cột cờ Lũng Cú</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=C%E1%BB%99t+c%E1%BB%9D+L%C5%A9ng+C%C3%BA" target="_blank" rel="noopener">↗ bản đồ</a><p>Vé khoảng 25–30k, xe điện khoảng 15k. Lá cờ rộng 54 m².</p></div></li>
+              <li class="key"><time>16:15</time><div class="what"><b>Cafe Cực Bắc & dạo làng</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Cafe+C%E1%BB%B1c+B%E1%BA%AFc+L%C3%B4+L%C3%B4+Ch%E1%BA%A3i" target="_blank" rel="noopener">↗ bản đồ</a><p>Ngồi ban công đón nắng chiều, rồi đi các ngõ chụp ảnh nhìn lên cột cờ.</p></div></li>
+              <li><time>18:30</time><div class="what"><b>Cơm tối ở homestay</b><p>Đêm lạnh, nên ngủ sớm.</p></div></li>
             </ol>
           </article>
 
@@ -352,48 +291,26 @@
             <div class="day-top"><div><div class="date">CHỦ NHẬT · 15/11</div><h3>Đèo & sông</h3></div><span class="badge-now">HÔM NAY</span></div>
             <div class="day-photos"><img src="img/mapileng-road.webp" alt="Đường đèo Mã Pí Lèng vắt qua sườn núi" loading="lazy" /><img src="img/tusan-river.webp" alt="Hẻm Tu Sản nhìn từ mặt sông" loading="lazy" /></div>
             <ol class="tl">
-              <li><time>06:15</time><div class="what"><b>Dạo làng lúc sương sớm</b><p>Ngõ làng nhìn lên cột cờ. Sau đó trả phòng.</p></div></li>
-              <li><time>07:30</time><div class="what"><b>Xe → Đồng Văn</b><p>25 km, khoảng 45 phút.</p><span class="chip move">~45′</span></div></li>
-              <li class="key"><time>08:15</time><div class="what"><b>Chợ phiên Đồng Văn + ăn sáng</b><p>Hôm nay là chủ nhật, đúng ngày chợ phiên. Gửi đồ trước ở CiCi Homestay để đi nhẹ người.</p><span class="chip scene">cảnh</span></div></li>
-              <li class="key"><time>09:30</time><div class="what"><b>Đỉnh đèo Mã Pí Lèng</b><p>Dừng chụp ảnh 20–30 phút. Panorama để chiều quay về mới ghé, vì đường về Đồng Văn đi ngang lại đèo này.</p><span class="chip scene">cảnh</span></div></li>
-              <li><time>10:30</time><div class="what"><b>Xuống bến Tu Sản</b><p>Theo QL4C về phía Mèo Vạc, ngay sau làng H'Mông Pả Vi rẽ phải vào đường 193A. Đoạn này ổ gà, có xe tải.</p></div></li>
-              <li><time>11:30</time><div class="what"><b>Cơm trưa Quán Anh Quân</b><p>Gọi đặt bàn trước: <a href="tel:0396226225">0396 226 225</a>.</p><span class="chip eat">ăn</span> <span class="stamp call">gọi trước</span></div></li>
-              <li class="key"><time>12:30</time><div class="what"><b>Thuyền sông Nho Quế qua Hẻm Tu Sản</b><p>Mua vé ở trung tâm du khách, đi xe điện ra đập, rồi đi bộ khoảng 200 m ra bến. Thuyền chỉ chạy khi đủ khách. Chủ nhật đông nên đến sớm.</p><span class="chip scene">60–90′ · 120k</span></div></li>
-              <li class="key"><time>15:15</time><div class="what"><b>Mã Pì Lèng Panorama</b><p>Trên đường về, ngồi cà phê giữa lưng đèo ngắm sông Nho Quế trong nắng chiều. Rời quán trước 16:45 để qua đèo khi trời còn sáng.</p><span class="chip cafe">cafe</span></div></li>
-              <li><time>17:15</time><div class="what"><b>Nhận phòng CiCi Homestay, Đồng Văn</b><p>Tối đi dạo phố cổ Đồng Văn lúc lên đèn.</p><span class="stamp booked">đã đặt</span></div></li>
+              <li><time>06:15</time><div class="what"><b>Dạo làng lúc sương sớm</b><p>Sau đó trả phòng.</p></div></li>
+              <li class="key"><time>08:15</time><div class="what"><b>Chợ phiên Đồng Văn + ăn sáng</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=Ph%E1%BB%91+c%E1%BB%95+%C4%90%E1%BB%93ng+V%C4%83n" target="_blank" rel="noopener">↗ bản đồ</a><p>Chợ phiên họp sáng chủ nhật. Gửi đồ trước ở CiCi Homestay.</p><span class="chip move">45′ từ Lô Lô Chải</span></div></li>
+              <li class="key"><time>09:30</time><div class="what"><b>Đỉnh đèo Mã Pí Lèng</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=%C4%90%C3%A8o+M%C3%A3+P%C3%AD+L%C3%A8ng" target="_blank" rel="noopener">↗ bản đồ</a><p>Dừng chụp ảnh 20–30 phút.</p></div></li>
+              <li><time>11:30</time><div class="what"><b>Cơm trưa Quán Anh Quân</b><p>Đặt bàn trước: <a href="tel:0396226225">0396 226 225</a>.</p></div></li>
+              <li class="key"><time>12:30</time><div class="what"><b>Thuyền sông Nho Quế, Hẻm Tu Sản</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=B%E1%BA%BFn+thuy%E1%BB%81n+H%E1%BA%BBm+Tu+S%E1%BA%A3n" target="_blank" rel="noopener">↗ bản đồ</a><p>Mua vé, đi xe điện ra đập, rồi đi bộ khoảng 200 m ra bến. Thuyền chạy khi đủ khách.</p><span class="chip scene">60–90′ · 120k</span></div></li>
+              <li class="key"><time>15:15</time><div class="what"><b>Mã Pì Lèng Panorama</b> <a class="map" href="https://www.google.com/maps/search/?api=1&query=M%C3%A3+P%C3%AC+L%C3%A8ng+Panorama" target="_blank" rel="noopener">↗ bản đồ</a><p>Ghé trên đường về, cà phê ngắm Nho Quế trong nắng chiều. Rời quán trước 16:45.</p></div></li>
+              <li><time>17:15</time><div class="what"><b>Nhận phòng CiCi Homestay</b><p>Tối dạo phố cổ Đồng Văn lúc lên đèn.</p><span class="stamp booked">đã đặt</span></div></li>
             </ol>
           </article>
 
           <article class="card day" data-day="2026-11-16">
             <div class="day-top"><div><div class="date">THỨ 2 · 16/11</div><h3>Về Hà Nội</h3></div><span class="badge-now">HÔM NAY</span></div>
-            <div class="day-photos" style="grid-template-columns:1fr"><img src="img/dongvan-town.webp" alt="Cổng phố cổ Đồng Văn" loading="lazy" style="object-position:center 60%" /></div>
+            <div class="day-photos one"><img src="img/dongvan-town.webp" alt="Cổng phố cổ Đồng Văn" loading="lazy" style="object-position:center 60%" /></div>
             <ol class="tl">
-              <li><time>06:30</time><div class="what"><b>Cà phê sáng ở phố cổ, trả phòng</b><p>Ăn sáng ở Đồng Văn trước khi lên xe.</p></div></li>
-              <li><time>07:30</time><div class="what"><b>Xe 7 chỗ: Đồng Văn → TP Hà Giang</b><p>Khoảng 4 giờ. Nếu lúc lên chưa kịp chụp chỗ nào trên đường thì nhờ tài xế dừng nhanh.</p><span class="chip move">~4 giờ</span></div></li>
-              <li class="key"><time>12:00</time><div class="what"><b>Ăn trưa, lên xe Bằng Phấn về Hà Nội</b>
-                <div class="opt"><b>A · Khuyên dùng.</b> Đi ban ngày nên chọn <b>limousine ghế ngả</b>. Nhà xe chạy nhiều chuyến trong ngày và có trả khách ở Nội Bài, Trần Quang Khải, Mỹ Đình.</div>
-                <div class="opt"><b>B · Nếu đặt được.</b> Xe chạy thẳng Đồng Văn → Hà Nội buổi sáng, đỡ phải đổi xe. Tôi chưa xác minh được giờ chạy, nên nhờ CiCi Homestay đặt giúp.</div>
-              </div></li>
-              <li><time>19–20h</time><div class="what"><b>Tới Hà Nội</b><p>Hà Nội tối thứ 2 hay tắc ở cửa ngõ, có thể muộn hơn dự kiến.</p><span class="chip move">6–7 giờ</span></div></li>
+              <li><time>06:30</time><div class="what"><b>Cà phê sáng phố cổ, trả phòng</b></div></li>
+              <li><time>07:30</time><div class="what"><b>Xe 7 chỗ Đồng Văn → TP Hà Giang</b><br /><span class="chip move">khoảng 4 giờ</span></div></li>
+              <li class="key"><time>12:00</time><div class="what"><b>Ăn trưa, lên xe Bằng Phấn</b><p>Đi ban ngày nên chọn limousine ghế ngả.</p><span class="chip move">6–7 giờ</span></div></li>
+              <li><time>19–20h</time><div class="what"><b>Tới Hà Nội</b></div></li>
             </ol>
           </article>
-        </div>
-      </div>
-    </section>
-
-    <section id="signature">
-      <div class="wrap">
-        <div class="sec-head">
-          <div><h2><span class="num">2</span>Bảng signature</h2><p>9 điểm · xếp theo thứ tự đi · không thêm điểm phụ</p></div>
-          <div class="filters" role="group" aria-label="Lọc theo loại">
-            <button type="button" data-f="all" aria-pressed="true">Tất cả</button>
-            <button type="button" data-f="scene" aria-pressed="false">Cảnh</button>
-            <button type="button" data-f="cafe" aria-pressed="false">Cafe</button>
-            <button type="button" data-f="eat" aria-pressed="false">Ăn</button>
-          </div>
-        </div>
-        <div class="card board" id="board">
-          <div class="row head"><span>#</span><span>Điểm</span><span>Loại</span><span>Khi nào</span><span>Vì sao / lưu ý</span><span>Trạng thái</span></div>
         </div>
       </div>
     </section>
@@ -401,61 +318,55 @@
     <section id="goc-chup">
       <div class="wrap">
         <div class="sec-head">
-          <div><h2><span class="num">3</span>Săn góc chụp</h2><p>3 góc chụp cột cờ · 2 góc Mã Pí Lèng · 1 góc trên sông</p></div>
+          <div><h2><span class="num">2</span>Góc chụp</h2><p>3 góc chụp cột cờ · 2 góc Mã Pí Lèng · 1 góc trên sông</p></div>
         </div>
         <div class="spots">
           <article class="card spot">
             <img src="img/lolochai.webp" alt="Mái nhà trình tường Lô Lô Chải" loading="lazy" style="object-position:center 60%" />
             <div class="body">
               <h3>Ngõ làng → cột cờ</h3>
-              <p>Đứng trong ngõ Lô Lô Chải, để mái nhà trình tường và hàng rào đá làm tiền cảnh, cột cờ trên đỉnh núi Rồng ở phía sau. Góc chụp đặc trưng nhất của chuyến đi.</p>
-              <div class="meta"><span class="chip scene">chiều 14/11 · sương sớm 15/11</span></div>
-              <div class="credit">ảnh: NKSTTSSHNVN / CC BY-SA 4.0</div>
+              <p>Đứng trong ngõ, lấy mái nhà trình tường làm tiền cảnh, cột cờ ở phía sau. Đây là góc đặc trưng nhất của chuyến đi.</p>
+              <div class="meta"><span class="chip scene">chiều 14 · sáng sớm 15</span></div>
             </div>
           </article>
           <article class="card spot">
             <img src="img/lungcu-tall.webp" alt="Cột cờ Lũng Cú" loading="lazy" style="object-position:center 25%" />
             <div class="body">
               <h3>Ban công Cafe Cực Bắc</h3>
-              <p>Quán nằm trong căn nhà gần 200 năm tuổi. Ban công nhìn xuống bản và nhìn được cột cờ. Có thể dùng ô cửa sổ tam giác làm khung ảnh. Quán cho thuê trang phục Lô Lô để chụp.</p>
+              <p>Từ ban công nhìn xuống bản và thấy được cột cờ. Có thể dùng ô cửa sổ tam giác làm khung ảnh.</p>
               <div class="meta"><span class="chip cafe">16:15–17:30 · 14/11</span></div>
-              <div class="credit">ảnh: Zennysmile / CC BY-SA 4.0</div>
             </div>
           </article>
           <article class="card spot">
             <img src="img/lungcu-tower.webp" alt="Lá cờ Tổ quốc tung bay trên cột cờ Lũng Cú" loading="lazy" />
             <div class="body">
-              <h3>Lá cờ 54 m² trên đỉnh</h3>
-              <p>Đứng dưới chân cột ngước lên khi cờ bay, rồi lên bục trên cùng nhìn xuống bản Lô Lô Chải. Gió rất mạnh, nhớ giữ chặt điện thoại và mũ.</p>
+              <h3>Lá cờ 54 m²</h3>
+              <p>Đứng dưới chân cột ngước lên khi cờ bay. Trên đỉnh gió mạnh, nhớ giữ chặt điện thoại.</p>
               <div class="meta"><span class="chip scene">14:30–16:00 · 14/11</span></div>
-              <div class="credit">ảnh: Vuong Tri Binh / CC BY-SA 4.0</div>
             </div>
           </article>
           <article class="card spot">
             <img src="img/dongvan-bs9.webp" alt="Sông Nho Quế nhìn từ đèo Mã Pí Lèng" loading="lazy" style="object-position:center 55%" />
             <div class="body">
               <h3>Mã Pì Lèng Panorama</h3>
-              <p>Cà phê và nhà nghỉ giữa lưng đèo, có ban công nhìn thẳng xuống sông Nho Quế. Ghé lúc chiều quay về để có nắng xiên chiếu vào hẻm vực. Công trình từng gây tranh cãi về giấy phép, nên xem Maps hoặc gọi trước để chắc còn mở. Nếu đóng thì ngắm ở đỉnh đèo.</p>
-              <div class="meta"><span class="chip cafe">15:15–16:45 · 15/11</span> <span class="stamp check">xác nhận lại</span></div>
-              <div class="credit">ảnh: Benjamin Smith / CC BY-SA 4.0</div>
+              <p>Ban công giữa lưng đèo nhìn thẳng xuống sông Nho Quế. Ghé buổi chiều để có nắng xiên chiếu vào hẻm vực.</p>
+              <div class="meta"><span class="chip cafe">15:15–16:45 · 15/11</span> <span class="stamp check">gọi xem còn mở</span></div>
             </div>
           </article>
           <article class="card spot">
             <img src="img/mapileng-pano.webp" alt="Toàn cảnh hẻm vực từ Mã Pí Lèng" loading="lazy" />
             <div class="body">
               <h3>Đỉnh đèo Mã Pí Lèng</h3>
-              <p>Chụp đường Hạnh Phúc vắt ngang vách núi và hẻm Tu Sản phía dưới. Buổi sáng có thể còn sương, nếu bị mù thì chiều quay về chụp lại. <b>Không trèo ra mép vực</b>, địa phương đã cắm biển cảnh báo.</p>
+              <p>Con đường Hạnh Phúc vắt ngang vách núi, hẻm Tu Sản ở phía dưới. <b>Không trèo ra mép vực.</b></p>
               <div class="meta"><span class="chip scene">09:30–10:00 · 15/11</span></div>
-              <div class="credit">ảnh: Velvet / CC BY-SA 4.0</div>
             </div>
           </article>
           <article class="card spot">
             <img src="img/tusan.webp" alt="Hẻm Tu Sản" loading="lazy" />
             <div class="body">
               <h3>Hẻm Tu Sản từ thuyền</h3>
-              <p>Khoảng 1 km sau bến là đoạn hẹp nhất, thuyền dừng cho khách chụp ảnh. Ngồi mũi thuyền để chụp hai bên vách đá. Lượt về thuyền dừng ở một quán ven sông, ngồi bao lâu cũng được.</p>
+              <p>Khoảng 1 km sau bến là đoạn hẹp nhất, thuyền dừng cho khách chụp ảnh. Ngồi ở mũi thuyền để chụp đẹp nhất.</p>
               <div class="meta"><span class="chip scene">12:30–14:30 · 15/11</span></div>
-              <div class="credit">ảnh: NKSTTSSHNVN / CC BY-SA 4.0</div>
             </div>
           </article>
         </div>
@@ -465,45 +376,40 @@
     <section id="di-chuyen">
       <div class="wrap">
         <div class="sec-head">
-          <div><h2><span class="num">4</span>Xe & vé</h2><p>3 vé, nên chốt sớm vì cuối tuần đang mùa tam giác mạch</p></div>
+          <div><h2><span class="num">3</span>Xe & vé</h2></div>
         </div>
         <div class="tickets">
           <article class="card ticket">
-            <div class="stub"><div class="leg">HN → HG<small>ĐÊM T6 13/11<br />21:00–22:00</small></div></div>
+            <div class="stub"><div class="leg">HN → HG<small>Đêm T6 13/11<br />21:00–22:00</small></div></div>
             <div class="info">
-              <h3>Nhà xe Bằng Phấn <span class="stamp ok">đã xác minh</span></h3>
+              <h3>Nhà xe Bằng Phấn</h3>
               <dl class="kv">
-                <dt>Điểm đón</dt><dd>Sân bay Nội Bài · 156 Trần Quang Khải · bến Mỹ Đình</dd>
-                <dt>Điểm trả</dt><dd>VP 100 Trần Phú, TP Hà Giang, hoặc trả tận khách sạn</dd>
-                <dt>Thời gian</dt><dd>6–7 giờ. Có thể trễ tới 1 tiếng vì xe đi đón khách</dd>
-                <dt>Giá</dt><dd>Khoảng 250k–470k tùy loại: giường nằm thường → limousine → cabin. Nên chọn cabin</dd>
-                <dt>Đặt vé</dt><dd>App MoMo / 12Go / Baolau, hoặc gọi hotline <a class="tel" href="tel:0917898898">☎ 0917 898 898</a></dd>
+                <dt>Đón</dt><dd>Sân bay Nội Bài · 156 Trần Quang Khải · bến Mỹ Đình</dd>
+                <dt>Trả</dt><dd>100 Trần Phú, TP Hà Giang</dd>
+                <dt>Giá</dt><dd>Khoảng 250k–470k tùy loại xe, nên chọn cabin</dd>
+                <dt>Hotline</dt><dd><a class="tel" href="tel:0917898898">☎ 0917 898 898</a></dd>
               </dl>
             </div>
           </article>
           <article class="card ticket alt">
-            <div class="stub"><div class="leg">Xe 7 chỗ<small>T7 14/11 → T2 16/11<br />thuê trọn 3 ngày</small></div></div>
+            <div class="stub"><div class="leg">Xe 7 chỗ<small>14/11 → 16/11<br />thuê trọn 3 ngày</small></div></div>
             <div class="info">
-              <h3>Taxi / xe ghép 7 chỗ <span class="stamp call">gọi chốt giá</span></h3>
+              <h3>Taxi / xe ghép 7 chỗ</h3>
               <dl class="kv">
-                <dt>Ngày 14</dt><dd>TP Hà Giang (6:00) → Lô Lô Chải, khoảng 5 giờ, dừng ở Cổng Trời Quản Bạ</dd>
-                <dt>Ngày 15</dt><dd>Lô Lô Chải → Đồng Văn → Mã Pí Lèng → bến Tu Sản → Panorama → về Đồng Văn</dd>
-                <dt>Ngày 16</dt><dd>Đồng Văn (7:30) → TP Hà Giang, khoảng 4 giờ, kịp bắt xe trưa về Hà Nội</dd>
-                <dt>Vì sao</dt><dd>Không có xe khách tới bến Tu Sản, và chủ nhật khó bắt xe ghép lẻ. Thuê 1 tài xế cho cả 3 ngày là đơn giản nhất</dd>
-                <dt>Liên hệ</dt><dd><a class="tel" href="tel:0385212552">☎ 0385 212 552</a></dd>
-                <dt>Phương án B</dt><dd>Nhà xe Văn Minh (tôi chưa tìm được thông tin online), hoặc limousine Hà Giang → Đồng Văn xuất bến khoảng 5h, rồi taxi thêm 25 km lên Lô Lô Chải. Cách này đến muộn hơn và khó đi ngày 15</dd>
+                <dt>14/11</dt><dd>TP Hà Giang → Lô Lô Chải</dd>
+                <dt>15/11</dt><dd>Lô Lô Chải → Đồng Văn → Mã Pí Lèng → Tu Sản → Đồng Văn</dd>
+                <dt>16/11</dt><dd>Đồng Văn → TP Hà Giang</dd>
+                <dt>Gọi</dt><dd><a class="tel" href="tel:0385212552">☎ 0385 212 552</a></dd>
               </dl>
             </div>
           </article>
           <article class="card ticket back">
-            <div class="stub"><div class="leg">HG → HN<small>TRƯA T2 16/11<br />~12:00–13:00</small></div></div>
+            <div class="stub"><div class="leg">HG → HN<small>Trưa T2 16/11<br />12:00–13:00</small></div></div>
             <div class="info">
-              <h3>Bằng Phấn chiều về <span class="stamp check">chưa đặt</span></h3>
+              <h3>Bằng Phấn chiều về</h3>
               <dl class="kv">
-                <dt>Loại xe</dt><dd>Limousine ghế ngả, hợp với chuyến đi ban ngày</dd>
-                <dt>Lên xe</dt><dd>100 Trần Phú, TP Hà Giang, hoặc nhờ xe đón tại chỗ ăn trưa</dd>
-                <dt>Tới HN</dt><dd>Khoảng 19:00–20:00 tối T2 16/11. Có thể xuống ở Nội Bài, Trần Quang Khải hoặc Mỹ Đình</dd>
-                <dt>Phương án B</dt><dd>Xe chạy thẳng Đồng Văn → Hà Nội buổi sáng. Tôi chưa xác minh được giờ, nên hỏi CiCi Homestay</dd>
+                <dt>Loại xe</dt><dd>Limousine ghế ngả</dd>
+                <dt>Tới HN</dt><dd>Khoảng 19:00–20:00, xuống ở Nội Bài, Trần Quang Khải hoặc Mỹ Đình</dd>
               </dl>
             </div>
           </article>
@@ -511,223 +417,144 @@
       </div>
     </section>
 
-    <section id="review">
+    <section id="chuan-bi">
       <div class="wrap">
         <div class="sec-head">
-          <div><h2><span class="num">5</span>Review brief</h2><p>giữ gì, chỉnh gì so với ghi chú ban đầu</p></div>
+          <div><h2><span class="num">4</span>Chuẩn bị</h2><p>tick được lưu ngay trên máy bạn</p></div>
         </div>
-        <div class="review">
-          <div class="card panel keep">
-            <h3>Giữ nguyên</h3>
-            <ul>
-              <li><span class="ic">✓</span><span><b>Thứ tự tuyến đúng chiều đường.</b> Lô Lô Chải → Đồng Văn → Mã Pí Lèng → Nho Quế đi một mạch, không phải quay lại.</span></li>
-              <li><span class="ic">✓</span><span><b>Ngủ ở Lô Lô Chải.</b> Có cả buổi chiều lẫn sáng sớm ở làng, đủ hai lần ánh sáng đẹp để chụp cột cờ.</span></li>
-              <li><span class="ic">✓</span><span><b>Ngủ Đồng Văn đêm 15.</b> Ngày 15 không phải vội chạy về, có thời gian ngồi Panorama lúc chiều và dạo phố cổ buổi tối.</span></li>
-              <li><span class="ic">✓</span><span><b>Đã đặt cả hai homestay</b> (Thing 0, CiCi). Giữa tháng 11 là mùa tam giác mạch, cuối tuần rất khó tìm phòng.</span></li>
-              <li><span class="ic">✓</span><span><b>Ăn trưa ở Anh Quân trước khi xuống thuyền.</b> Quán ven sông chỗ thuyền dừng chỉ có mì gói và đồ ăn vặt.</span></li>
-            </ul>
+        <div class="lists">
+          <div class="card list">
+            <div class="list-head"><h3>Cần chốt</h3><span class="progress" data-for="todo"></span></div>
+            <div class="checks" id="todo"></div>
           </div>
-          <div class="card panel fix">
-            <h3>Nên chỉnh</h3>
-            <ul>
-              <li><span class="ic">1</span><span><b>Chốt chặng về trưa 16/11.</b> Đồng Văn → TP Hà Giang bằng xe 7 chỗ (khoảng 4 giờ), rồi đi Bằng Phấn limousine về Hà Nội, tới khoảng 19–20h. Nên đặt vé luôn.</span></li>
-              <li><span class="ic">2</span><span><b>Thuê trọn 1 xe 7 chỗ cho cả 3 ngày</b> thay vì đi xe khách Văn Minh. Ngày 15 không có xe công cộng tới bến Tu Sản.</span></li>
-              <li><span class="ic">3</span><span><b>Lên cột cờ chiều 14/11, không đi lúc bình minh.</b> Cột cờ mở 8:00–17:00. Sáng 15/11 dành để dạo làng.</span></li>
-              <li><span class="ic">4</span><span><b>Tên đúng là Mã Pì Lèng Panorama</b>, không phải "Panamora". Nên ghé lúc chiều quay về Đồng Văn. Quán từng gây tranh cãi về giấy phép, nên xác nhận còn mở trước khi tới.</span></li>
-              <li><span class="ic">5</span><span><b>Ghé chợ phiên Đồng Văn.</b> Chủ nhật 15/11 trùng ngày chợ phiên, mà sáng hôm đó bạn đi ngang qua.</span></li>
-              <li><span class="ic">6</span><span><b>Gọi lại trước 1–2 ngày</b> cho Thing 0, CiCi Homestay, Tiệm cơm Vị Nhà, Nội Phủ house và Quán Anh Quân. Tôi chưa tìm được thông tin online của các chỗ này.</span></li>
-              <li><span class="ic">7</span><span><b>Hà Giang đã nhập vào Tuyên Quang từ 1/7/2025.</b> Maps và vé xe có thể ghi "Tuyên Quang", ví dụ "xã Lũng Cú, Tuyên Quang".</span></li>
-            </ul>
+          <div class="card list">
+            <div class="list-head"><h3>Mang theo</h3><span class="progress" data-for="pack"></span></div>
+            <div class="checks" id="pack"></div>
           </div>
         </div>
-      </div>
-    </section>
-
-    <section id="mang-theo">
-      <div class="wrap">
-        <div class="sec-head">
-          <div><h2><span class="num">6</span>Mang theo</h2><p>tick lưu trên máy bạn</p></div>
-          <span class="progress" id="pack-progress">0/12</span>
-        </div>
-        <div class="card pack" id="pack"></div>
       </div>
     </section>
   </main>
 
   <footer>
     <div class="wrap">
-      <div class="card">
-        <h3>Nguồn & ảnh</h3>
+      <details class="card">
+        <summary>Nguồn thông tin & giấy phép ảnh</summary>
         <ol>
-          <li><a href="https://www.vietnamcoracle.com/hanoi-to-ha-giang-sleeper-bus/" target="_blank" rel="noopener">Vietnam Coracle: xe Bằng Phấn Hà Nội – Hà Giang</a></li>
-          <li><a href="https://www.vietnamcoracle.com/tu-san-canyon-boat-trip-ha-giang/" target="_blank" rel="noopener">Vietnam Coracle: thuyền Hẻm Tu Sản</a></li>
-          <li><a href="https://vnexpress.net/cam-nang-du-lich-lo-lo-chai-4952798.html" target="_blank" rel="noopener">VnExpress: cẩm nang Lô Lô Chải</a></li>
-          <li><a href="https://mia.vn/cam-nang-du-lich/tiem-cafe-cuc-bac-ha-giang-20360" target="_blank" rel="noopener">Mia.vn: Cafe Cực Bắc</a></li>
-          <li><a href="https://www.vietnamairlines.com/go/vi/plan-book/travel/travel-guide/lung-cu-flag-point" target="_blank" rel="noopener">Vietnam Airlines: cột cờ Lũng Cú</a></li>
-          <li><a href="https://vov.vn/di-san/lam-gi-voi-ma-pi-leng-panorama-khi-gao-da-nau-thanh-com-963924.vov" target="_blank" rel="noopener">VOV: Mã Pì Lèng Panorama</a></li>
-          <li><a href="https://tienphong.vn/toa-do-xin-nhat-ngam-toan-canh-lang-du-lich-tot-nhat-the-gioi-lo-lo-chai-post1800451.html" target="_blank" rel="noopener">Tiền Phong: ngắm toàn cảnh Lô Lô Chải</a></li>
-          <li><a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo: dự báo thời tiết</a></li>
-          <li>Ảnh Wikimedia Commons:
+          <li><a href="https://www.vietnamcoracle.com/hanoi-to-ha-giang-sleeper-bus/" target="_blank" rel="noopener">Vietnam Coracle: xe Bằng Phấn</a> · <a href="https://www.vietnamcoracle.com/tu-san-canyon-boat-trip-ha-giang/" target="_blank" rel="noopener">thuyền Tu Sản</a></li>
+          <li><a href="https://vnexpress.net/cam-nang-du-lich-lo-lo-chai-4952798.html" target="_blank" rel="noopener">VnExpress: Lô Lô Chải</a> · <a href="https://mia.vn/cam-nang-du-lich/tiem-cafe-cuc-bac-ha-giang-20360" target="_blank" rel="noopener">Mia.vn: Cafe Cực Bắc</a> · <a href="https://www.vietnamairlines.com/go/vi/plan-book/travel/travel-guide/lung-cu-flag-point" target="_blank" rel="noopener">Vietnam Airlines: cột cờ Lũng Cú</a> · <a href="https://vov.vn/di-san/lam-gi-voi-ma-pi-leng-panorama-khi-gao-da-nau-thanh-com-963924.vov" target="_blank" rel="noopener">VOV: Mã Pì Lèng Panorama</a></li>
+          <li>Thời tiết: <a href="https://open-meteo.com/" target="_blank" rel="noopener">Open-Meteo</a></li>
+          <li>Ảnh Wikimedia Commons, đã thu nhỏ và nén:
             <a href="https://commons.wikimedia.org/wiki/File:S%C3%B4ng_Nho_Qu%E1%BA%BF_2022_-_NKS.jpg" target="_blank" rel="noopener">Nho Quế</a>,
             <a href="https://commons.wikimedia.org/wiki/File:L%C3%B4_L%C3%B4_Ch%E1%BA%A3i_2022_-_NKS.jpg" target="_blank" rel="noopener">Lô Lô Chải</a>,
             <a href="https://commons.wikimedia.org/wiki/File:TuSan_Canyon.jpg" target="_blank" rel="noopener">Tu Sản</a>,
-            <a href="https://commons.wikimedia.org/wiki/File:Tu_San_abyss_from_the_river.jpg" target="_blank" rel="noopener">Tu Sản từ sông</a> (NKSTTSSHNVN, CC BY-SA 4.0);
-            <a href="https://commons.wikimedia.org/wiki/File:Lung_Cu_Flag_Tower.jpg" target="_blank" rel="noopener">Cột cờ</a> (Zennysmile, CC BY-SA 4.0);
-            <a href="https://commons.wikimedia.org/wiki/File:Lung_Cu_flag_tower_of_Ha_Giang_in_2014_04.jpg" target="_blank" rel="noopener">Lá cờ</a> (Vuong Tri Binh, CC BY-SA 4.0);
-            <a href="https://commons.wikimedia.org/wiki/File:Ma_Pi_Leng_Pass_winding_road_Ha_Giang_Vietnam.jpg" target="_blank" rel="noopener">Đường đèo</a> (Khánh Hmoong, CC BY 2.0);
-            <a href="https://commons.wikimedia.org/wiki/File:Ma_Pi_Leng_panorama.jpg" target="_blank" rel="noopener">Mã Pí Lèng</a> (Velvet, CC BY-SA 4.0);
-            <a href="https://commons.wikimedia.org/wiki/File:%C4%90%E1%BB%93ng_V%C4%83n,_Vietnam_-_9.jpg" target="_blank" rel="noopener">Nho Quế từ đèo</a> (Benjamin Smith, CC BY-SA 4.0).
-            Ảnh đã thu nhỏ và nén, giấy phép theo <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a> / <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener">CC BY 2.0</a>.</li>
+            <a href="https://commons.wikimedia.org/wiki/File:Tu_San_abyss_from_the_river.jpg" target="_blank" rel="noopener">Tu Sản từ sông</a> (NKSTTSSHNVN, CC BY-SA 4.0) ·
+            <a href="https://commons.wikimedia.org/wiki/File:Lung_Cu_Flag_Tower.jpg" target="_blank" rel="noopener">Cột cờ</a> (Zennysmile, CC BY-SA 4.0) ·
+            <a href="https://commons.wikimedia.org/wiki/File:Lung_Cu_flag_tower_of_Ha_Giang_in_2014_04.jpg" target="_blank" rel="noopener">Lá cờ</a> (Vuong Tri Binh, CC BY-SA 4.0) ·
+            <a href="https://commons.wikimedia.org/wiki/File:Ma_Pi_Leng_Pass_winding_road_Ha_Giang_Vietnam.jpg" target="_blank" rel="noopener">Đường đèo</a> (Khánh Hmoong, CC BY 2.0) ·
+            <a href="https://commons.wikimedia.org/wiki/File:Ma_Pi_Leng_panorama.jpg" target="_blank" rel="noopener">Mã Pí Lèng</a> (Velvet, CC BY-SA 4.0) ·
+            <a href="https://commons.wikimedia.org/wiki/File:%C4%90%E1%BB%93ng_V%C4%83n,_Vietnam_-_9.jpg" target="_blank" rel="noopener">Nho Quế từ đèo</a> (Benjamin Smith, CC BY-SA 4.0) ·
+            <a href="https://commons.wikimedia.org/wiki/File:Dong_Van_old_town.jpg" target="_blank" rel="noopener">Phố cổ Đồng Văn</a> (HuangWending18072009, CC0) ·
+            giấy phép <a href="https://creativecommons.org/licenses/by-sa/4.0" target="_blank" rel="noopener">CC BY-SA 4.0</a> / <a href="https://creativecommons.org/licenses/by/2.0" target="_blank" rel="noopener">CC BY 2.0</a>.</li>
         </ol>
-        <div class="fine">Cập nhật 07/11/2026. Giá, giờ chạy và giờ mở cửa có thể thay đổi, nên gọi xác nhận trước 1–2 ngày. Phong cách trang lấy cảm hứng từ Model Pulse.</div>
-      </div>
+        <div class="fine">Cập nhật 07/11/2026. Giá và giờ có thể thay đổi, nên gọi xác nhận trước 1–2 ngày.</div>
+      </details>
     </div>
   </footer>
 
   <script>
-    // ---- countdown pulse (giờ Việt Nam, UTC+7) ----
+    // ---- countdown (giờ Việt Nam, UTC+7) ----
     (function () {
       var dep = Date.UTC(2026, 10, 13, 14, 0);   // 21:00 13/11 ICT
       var home = Date.UTC(2026, 10, 16, 13, 0);  // ~20:00 16/11 ICT
       var el = document.getElementById("pulse-text");
       function tick() {
-        var now = Date.now(), t;
+        var now = Date.now();
         if (now < dep) {
           var s = Math.floor((dep - now) / 1000), d = Math.floor(s / 86400), h = Math.floor(s % 86400 / 3600), m = Math.floor(s % 3600 / 60);
-          t = "Còn " + (d ? d + " ngày " : "") + h + " giờ " + m + " phút tới giờ lên xe";
+          el.textContent = "Còn " + (d ? d + " ngày " : "") + h + " giờ " + m + " phút tới giờ lên xe";
         } else if (now < home) {
-          t = "Đang trên hành trình Cực Bắc";
+          el.textContent = "Đang trên hành trình Cực Bắc";
         } else {
-          t = "Đã về Hà Nội ✓ Hẹn chuyến sau";
+          el.textContent = "Đã về Hà Nội ✓ Hẹn chuyến sau";
         }
-        el.textContent = t;
       }
       tick(); setInterval(tick, 30000);
-      // highlight today's card
       var ict = new Date(Date.now() + 7 * 3600e3).toISOString().slice(0, 10);
       var card = document.querySelector('.day[data-day="' + ict + '"]');
       if (card) card.classList.add("now");
     })();
 
-    // ---- travel-time bars ----
+    // ---- checklists (lưu cục bộ) ----
     (function () {
-      var legs = [
-        ["Xe đêm HN → HG", 6.5, "6–7h", "Bằng Phấn, tối 13/11. Ngủ trên xe.", true],
-        ["HG → Lô Lô Chải", 5, "~5h", "154 km QL4C qua Quản Bạ, Yên Minh, Đồng Văn."],
-        ["Lô Lô Chải → Đồng Văn", 0.75, "~45′", "25 km, sáng 15/11."],
-        ["Đồng Văn → Mã Pí Lèng", 0.5, "~30′", "Dừng ở đỉnh đèo buổi sáng."],
-        ["Mã Pí Lèng → bến Tu Sản", 0.75, "~45′", "QL4C → rẽ đường 193A sau Pả Vi."],
-        ["Thuyền Hẻm Tu Sản", 1.25, "60–90′", "120k/người, thuyền chạy khi đủ khách."],
-        ["Tu Sản → Đồng Văn", 1, "~1h", "Ghé Panorama khi quay lại qua đèo."],
-        ["Đồng Văn → TP Hà Giang", 4, "~4h", "Sáng 16/11, xe 7 chỗ."],
-        ["Xe ngày HG → HN", 6.5, "6–7h", "Bằng Phấn limousine, trưa 16/11."]
-      ];
-      var max = 8, host = document.getElementById("bars");
-      legs.forEach(function (l) {
-        var row = document.createElement("div"); row.className = "bar-row";
-        row.innerHTML = '<div class="lbl">' + l[0] + (l[4] ? "<em>ĐÊM</em>" : "") + '</div>' +
-          '<div class="track"><div class="bar" tabindex="0" role="img" aria-label="' + l[0] + ": " + l[2] + '" style="width:calc((100% - 56px) * ' + (l[1] / max) + ')">' +
-          '<span class="tip"><b>' + l[0] + "</b><br>" + l[2] + " · " + l[3] + "</span></div>" +
-          '<span class="val">' + l[2] + "</span></div>";
-        host.appendChild(row);
-      });
-    })();
-
-    // ---- signature board ----
-    (function () {
-      var maps = function (q) { return "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q); };
-      var S = { ok: ["ok", "đã xác minh"], booked: ["booked", "đã đặt"], call: ["call", "gọi trước"], check: ["check", "xác nhận lại"] };
-      var T = { scene: "cảnh", cafe: "cafe", eat: "ăn" };
-      var spots = [
-        ["Tiệm cơm Vị Nhà", "eat", "14/11 · 11:45", "Cơm nhà ở Lô Lô Chải sau chặng xe dài.", "check", "Tiệm cơm Vị Nhà Lô Lô Chải"],
-        ["Nội Phủ house", "cafe", "14/11 · 13:30", "Ô long gạo rang, nghỉ chân lấy sức.", "check", "Nội Phủ house Lô Lô Chải"],
-        ["Cột cờ Lũng Cú", "scene", "14/11 · 14:30", "Điểm cực Bắc, cờ 54 m². Mở 8:00–17:00, vé khoảng 25–30k.", "ok", "Cột cờ Lũng Cú"],
-        ["Cafe Cực Bắc", "cafe", "14/11 · 16:15", "Nhà trình tường gần 200 năm, ban công nhìn bản và cột cờ. Đồ uống khoảng 35–45k.", "ok", "Cafe Cực Bắc Lô Lô Chải"],
-        ["Làng Lô Lô Chải", "scene", "chiều 14 + sáng 15", "UN Tourism: Làng du lịch tốt nhất thế giới 2025. Đẹp nhất khi có sương.", "booked", "Lô Lô Chải Lũng Cú"],
-        ["Đồng Văn: chợ phiên + phố cổ", "scene", "15/11 · 08:15 + tối", "Sáng chủ nhật có chợ phiên, tối dạo phố cổ lên đèn. Ngủ ở CiCi Homestay.", "booked", "Phố cổ Đồng Văn"],
-        ["Mã Pí Lèng + Panorama", "scene", "15/11 · 09:30 & 15:15", "Sáng dừng ở đỉnh đèo, chiều quay về ghé Panorama. Cần xác nhận quán còn mở.", "check", "Mã Pì Lèng Panorama"],
-        ["Quán cơm Anh Quân", "eat", "15/11 · 11:30", "Gần khu du lịch Tu Sản. Đặt bàn: 0396 226 225.", "call", "Khu du lịch Hẻm Tu Sản"],
-        ["Thuyền Nho Quế, Hẻm Tu Sản", "scene", "15/11 · 12:30", "120k, 60–90 phút, phòng vé mở 7:00–18:30.", "ok", "Bến thuyền Hẻm Tu Sản"]
-      ];
-      var board = document.getElementById("board");
-      spots.forEach(function (s, i) {
-        var r = document.createElement("div"); r.className = "row"; r.dataset.type = s[1];
-        r.innerHTML = '<span class="rank">' + String(i + 1).padStart(2, "0") + "</span>" +
-          '<span class="place"><b>' + s[0] + '</b><br><a href="' + maps(s[5]) + '" target="_blank" rel="noopener">↗ bản đồ</a></span>' +
-          '<span class="type"><span class="chip ' + s[1] + '">' + T[s[1]] + "</span></span>" +
-          '<span class="when">' + s[2] + "</span>" +
-          '<span class="why">' + s[3] + "</span>" +
-          '<span class="status"><span class="stamp ' + S[s[4]][0] + '">' + S[s[4]][1] + "</span></span>";
-        board.appendChild(r);
-      });
-      document.querySelectorAll(".filters button").forEach(function (b) {
-        b.addEventListener("click", function () {
-          var f = b.dataset.f;
-          document.querySelectorAll(".filters button").forEach(function (x) { x.setAttribute("aria-pressed", x === b); });
-          board.querySelectorAll(".row:not(.head)").forEach(function (r) { r.hidden = f !== "all" && r.dataset.type !== f; });
+      var lists = {
+        todo: [
+          ["Vé xe đêm 13/11 (cabin)", "Bằng Phấn · <a href=\"tel:0917898898\">0917 898 898</a>"],
+          ["Vé xe về trưa 16/11 (limousine)", "cuối tuần mùa hoa, vé hết nhanh"],
+          ["Thuê trọn xe 7 chỗ 14–16/11", "<a href=\"tel:0385212552\">0385 212 552</a> · chốt giá cả 3 ngày"],
+          ["Đặt bàn Quán Anh Quân trưa 15/11", "<a href=\"tel:0396226225\">0396 226 225</a>"],
+          ["Gọi lại Thing 0 & CiCi Homestay", "xác nhận phòng trước 1–2 ngày"],
+          ["Hỏi Mã Pì Lèng Panorama còn mở", "nếu đóng thì ngắm ở đỉnh đèo"]
+        ],
+        pack: [
+          ["Dầu tắm, dầu gội", "homestay thường không có sẵn"],
+          ["Bánh kẹo, đồ ăn vặt", "quán ở bến thuyền chỉ có mì gói"],
+          ["Áo phao, mũ len, găng tay", "đêm trên cao có thể dưới 10°C"],
+          ["Tiền mặt", "vé cột cờ, xe điện, thuyền"],
+          ["CCCD", "đăng ký lưu trú vùng biên giới"],
+          ["Thuốc say xe", "đường đèo nhiều"],
+          ["Sạc dự phòng", ""],
+          ["Giày đế bám", "bậc đá cột cờ, lối ra bến thuyền"],
+          ["Kem chống nắng, kính râm", ""],
+          ["Áo mưa mỏng", ""]
+        ]
+      };
+      Object.keys(lists).forEach(function (id) {
+        var items = lists[id], KEY = "cucbac-" + id + "-v2", saved = {};
+        try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) {}
+        var host = document.getElementById(id), prog = document.querySelector('.progress[data-for="' + id + '"]');
+        function update() {
+          var n = host.querySelectorAll("input:checked").length;
+          prog.textContent = n + "/" + items.length + (n === items.length ? " ✓" : "");
+        }
+        items.forEach(function (it, i) {
+          var l = document.createElement("label");
+          l.innerHTML = '<input type="checkbox"' + (saved[i] ? " checked" : "") + "><span>" + it[0] + (it[1] ? "<small>" + it[1] + "</small>" : "") + "</span>";
+          l.querySelector("input").addEventListener("change", function (e) {
+            saved[i] = e.target.checked;
+            try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (err) {}
+            update();
+          });
+          host.appendChild(l);
         });
+        update();
       });
-    })();
-
-    // ---- packing list (lưu cục bộ) ----
-    (function () {
-      var items = [
-        ["Dầu tắm, dầu gội", "homestay thường không có sẵn"],
-        ["Bánh kẹo, đồ ăn vặt", "ăn dọc đường; quán ven sông chỉ có mì gói. Tránh phát kẹo, tiền cho trẻ em ven đường"],
-        ["Áo phao / áo ấm, mũ len, găng tay", "đêm trên cao nguyên có thể dưới 10°C"],
-        ["Tiền mặt", "vé cột cờ, xe điện, thuyền, cà phê; ATM rất ít"],
-        ["CCCD", "vùng biên giới, homestay cần đăng ký tạm trú"],
-        ["Thuốc say xe", "~26 giờ đường đèo"],
-        ["Sạc dự phòng + cáp", "ngồi xe lâu, chụp ảnh nhiều"],
-        ["Giày đế bám", "bậc đá cột cờ, đường đi xuống bến thuyền"],
-        ["Kem chống nắng, kính râm", "nắng gắt trên thuyền và trên đèo"],
-        ["Áo mưa mỏng", "phòng mưa trên đèo"],
-        ["Ảnh chụp vé xe + số điện thoại", "trên đèo sóng điện thoại yếu"],
-        ["Khăn ướt, túi rác nhỏ", "mang rác về, giữ đèo sạch"]
-      ];
-      var KEY = "cucbac-pack-v1", saved = {};
-      try { saved = JSON.parse(localStorage.getItem(KEY) || "{}"); } catch (e) {}
-      var host = document.getElementById("pack"), prog = document.getElementById("pack-progress");
-      function update() {
-        var n = host.querySelectorAll("input:checked").length;
-        prog.textContent = n + "/" + items.length + (n === items.length ? " · sẵn sàng!" : "");
-      }
-      items.forEach(function (it, i) {
-        var l = document.createElement("label");
-        l.innerHTML = '<input type="checkbox" ' + (saved[i] ? "checked" : "") + '><span>' + it[0] + "<small>" + it[1] + "</small></span>";
-        l.querySelector("input").addEventListener("change", function (e) {
-          saved[i] = e.target.checked;
-          try { localStorage.setItem(KEY, JSON.stringify(saved)); } catch (err) {}
-          update();
-        });
-        host.appendChild(l);
-      });
-      update();
     })();
 
     // ---- live weather (Open-Meteo) ----
     (function () {
-      var places = [["Lũng Cú", 23.364, 105.316], ["Đồng Văn", 23.279, 105.363], ["Mèo Vạc / Nho Quế", 23.16, 105.407]];
-      var codes = { 0: "Trời quang", 1: "Ít mây", 2: "Có mây", 3: "Nhiều mây", 45: "Sương mù", 48: "Sương mù", 51: "Mưa phùn", 53: "Mưa phùn", 55: "Mưa phùn", 61: "Mưa nhỏ", 63: "Mưa", 65: "Mưa to", 80: "Mưa rào", 81: "Mưa rào", 82: "Mưa rào to", 95: "Dông" };
+      var places = [["Lũng Cú", 23.364, 105.316], ["Đồng Văn", 23.279, 105.363], ["Nho Quế", 23.16, 105.407]];
+      var codes = { 0: "Quang", 1: "Ít mây", 2: "Có mây", 3: "Nhiều mây", 45: "Sương mù", 48: "Sương mù", 51: "Mưa phùn", 53: "Mưa phùn", 55: "Mưa phùn", 61: "Mưa nhỏ", 63: "Mưa", 65: "Mưa to", 80: "Mưa rào", 81: "Mưa rào", 82: "Mưa rào to", 95: "Dông" };
+      var days = ["T7 14/11", "CN 15/11"];
       var url = "https://api.open-meteo.com/v1/forecast?latitude=" + places.map(function (p) { return p[1]; }).join(",") +
         "&longitude=" + places.map(function (p) { return p[2]; }).join(",") +
         "&daily=temperature_2m_max,temperature_2m_min,precipitation_probability_max,weather_code&timezone=Asia%2FBangkok&start_date=2026-11-14&end_date=2026-11-15";
-      var tb = document.querySelector("#wx tbody");
+      var host = document.getElementById("wx");
       fetch(url).then(function (r) { if (!r.ok) throw r.status; return r.json(); }).then(function (data) {
         data = Array.isArray(data) ? data : [data];
-        tb.innerHTML = "";
+        host.innerHTML = "";
         data.forEach(function (d, i) {
-          var tr = document.createElement("tr"), cells = '<td><b style="font:600 14px var(--font)">' + places[i][0] + "</b><small>" + Math.round(d.elevation) + " m</small></td>";
+          var html = '<h4>' + places[i][0] + '<small>' + Math.round(d.elevation) + ' m</small></h4>';
           for (var k = 0; k < 2; k++) {
             var lo = Math.round(d.daily.temperature_2m_min[k]), hi = Math.round(d.daily.temperature_2m_max[k]);
-            var pr = d.daily.precipitation_probability_max[k], c = codes[d.daily.weather_code[k]] || "—";
-            cells += "<td><b>" + lo + "–" + hi + "°</b><small>" + c + (pr != null ? " · mưa " + pr + "%" : "") + "</small></td>";
+            var c = codes[d.daily.weather_code[k]] || "";
+            html += '<div class="wx-day"><span>' + days[k] + '</span><b>' + lo + "–" + hi + "°</b><span>" + c + "</span></div>";
           }
-          tr.innerHTML = cells; tb.appendChild(tr);
+          var box = document.createElement("div"); box.className = "wx-place"; box.innerHTML = html; host.appendChild(box);
         });
-        document.getElementById("wx-sub").textContent = "dự báo trực tiếp · Open-Meteo · cập nhật khi mở trang";
+        document.getElementById("wx-sub").textContent = "Dự báo trực tiếp, đêm lạnh nên mang áo ấm";
       }).catch(function () {
-        tb.innerHTML = '<tr><td colspan="3"><small>Chưa lấy được dự báo. Tham khảo: tháng 11 ban ngày ~20°C, đêm 8–15°C, ít mưa.</small></td></tr>';
+        host.innerHTML = '<div class="wx-place"><div class="wx-day"><span>Tháng 11: ngày khoảng 20°C, đêm 8–15°C, ít mưa, sáng hay có sương.</span></div></div>';
       });
     })();
   </script>
